@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lingua Latina vocabulary</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #e9ece6;
+  --surface: #f7f8f4;
+  --stone: #dde2da;
+  --ink: #1e2a35;
+  --muted: #5b6670;
+  --line: #c6ccc3;
+  --red: #9b2226;
+  --red-soft: #f3dcdc;
+  --green: #2c7a67;
+  --green-soft: #d7ece5;
+  --amber: #a86a12;
+  --display: 'Cinzel', 'Trajan Pro', Georgia, serif;
+  --body: 'Alegreya Sans', 'Gill Sans', 'Segoe UI', system-ui, sans-serif;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #161c22; --surface: #1f2730; --stone: #28323c; --ink: #e6e9e3; --muted: #9aa5ad;
+    --line: #36424d; --red: #e06666; --red-soft: #3a2326; --green: #5fb89f; --green-soft: #1d3530; --amber: #e0a84a;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #161c22; --surface: #1f2730; --stone: #28323c; --ink: #e6e9e3; --muted: #9aa5ad;
+  --line: #36424d; --red: #e06666; --red-soft: #3a2326; --green: #5fb89f; --green-soft: #1d3530; --amber: #e0a84a;
+}
+*, *::before, *::after { box-sizing: inherit; }
+html { height: 100%; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; min-height: 100%;
+  background: var(--bg); color: var(--ink);
+  font-family: var(--body); font-size: 1.125rem; line-height: 1.5;
+  -webkit-tap-highlight-color: transparent;
+}
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid var(--red); outline-offset: 2px; }
+.wrap { max-width: 40rem; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
+
+/* Home */
+.masthead { padding: 1rem 0 1.75rem; border-bottom: 2px solid var(--ink); margin-bottom: 1.5rem; }
+.masthead h1 {
+  font-family: var(--display); font-weight: 700; font-size: clamp(2.2rem, 9vw, 3.4rem);
+  letter-spacing: 0.06em; line-height: 1.05; margin: 0;
+}
+.masthead p { margin: 0.5rem 0 0; color: var(--muted); }
+.overall { margin-top: 1rem; font-size: 1rem; }
+.overall strong { font-family: var(--display); font-size: 1.25rem; }
+
+h2 { font-size: 1.05rem; font-weight: 700; margin: 1.75rem 0 0.6rem; }
+.row { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+.linkish { background: none; border: 0; padding: 0.25rem 0; color: var(--red); font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
+
+.chapters { display: grid; grid-template-columns: repeat(auto-fill, minmax(4.1rem, 1fr)); gap: 0.4rem; }
+.ch {
+  position: relative; background: var(--surface); border: 1.5px solid var(--line); border-radius: 3px;
+  padding: 0.55rem 0.2rem 0.75rem; text-align: center; overflow: hidden;
+}
+.ch .num { font-family: var(--display); font-weight: 700; font-size: 1.05rem; display: block; line-height: 1.2; }
+.ch .cnt { font-size: 0.78rem; color: var(--muted); display: block; }
+.ch .bar { position: absolute; left: 0; bottom: 0; height: 4px; background: var(--green); }
+.ch[aria-pressed="true"] { border-color: var(--red); background: var(--red-soft); box-shadow: inset 0 0 0 1px var(--red); }
+
+.seg { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.seg button {
+  flex: 1 1 auto; background: var(--surface); border: 1.5px solid var(--line); border-radius: 3px;
+  padding: 0.55rem 0.8rem; font-weight: 500;
+}
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.hint { font-size: 0.95rem; color: var(--muted); margin: 0.4rem 0 0; }
+
+.primary {
+  display: block; width: 100%; margin-top: 2rem; padding: 1rem;
+  background: var(--red); color: #fff; border: 0; border-radius: 3px;
+  font-weight: 700; font-size: 1.2rem;
+}
+.primary:disabled { opacity: 0.45; cursor: not-allowed; }
+.secondary {
+  display: block; width: 100%; margin-top: 0.6rem; padding: 0.85rem;
+  background: transparent; border: 1.5px solid var(--ink); border-radius: 3px; font-weight: 700;
+}
+.foot { margin-top: 2.5rem; font-size: 0.9rem; color: var(--muted); }
+
+/* Session */
+.topbar { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; }
+.topbar .linkish { color: var(--muted); }
+.progress { flex: 1; height: 6px; background: var(--stone); border-radius: 3px; overflow: hidden; }
+.progress i { display: block; height: 100%; background: var(--ink); transition: width 0.25s; }
+.count { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 1rem; }
+
+.tablet {
+  background: var(--surface); border: 1.5px solid var(--line); border-radius: 4px;
+  padding: 1.5rem 1.25rem 1.75rem; min-height: 12rem;
+  display: flex; flex-direction: column; justify-content: center; text-align: center;
+}
+.tablet.clickable { cursor: pointer; }
+.cap { font-family: var(--display); font-size: 0.85rem; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 0.9rem; }
+.latin {
+  font-family: var(--display); font-weight: 700; letter-spacing: 0.03em;
+  font-size: clamp(1.5rem, 6.5vw, 2.3rem); line-height: 1.25; overflow-wrap: anywhere;
+}
+.latin .rest { display: block; font-weight: 500; font-size: 0.55em; color: var(--muted); letter-spacing: 0.02em; margin-top: 0.3rem; }
+.english { font-size: clamp(1.4rem, 5.5vw, 1.9rem); font-weight: 500; line-height: 1.3; }
+.ask { color: var(--muted); font-size: 1rem; margin-top: 1rem; }
+
+.reveal { margin-top: 1.25rem; padding-top: 1.1rem; border-top: 1px solid var(--line); text-align: left; }
+.reveal .latin { font-size: 1.35rem; }
+.reveal .english { font-size: 1.2rem; margin-top: 0.2rem; }
+.deriv { font-size: 0.98rem; color: var(--muted); margin-top: 0.6rem; }
+.deriv em { color: var(--ink); font-style: italic; }
+
+.verdict { font-weight: 700; margin-bottom: 0.5rem; }
+.verdict.good { color: var(--green); }
+.verdict.bad { color: var(--red); }
+.verdict.close { color: var(--amber); }
+
+.options { display: grid; gap: 0.5rem; margin-top: 1rem; }
+.opt {
+  display: flex; gap: 0.75rem; align-items: baseline; text-align: left;
+  background: var(--surface); border: 1.5px solid var(--line); border-radius: 3px; padding: 0.8rem 0.9rem;
+}
+.opt .k { font-size: 0.85rem; color: var(--muted); min-width: 1rem; }
+.opt.lat { font-family: var(--display); font-weight: 700; letter-spacing: 0.02em; }
+.opt.correct { border-color: var(--green); background: var(--green-soft); }
+.opt.wrong { border-color: var(--red); background: var(--red-soft); }
+.opt:disabled { cursor: default; color: inherit; }
+
+.answer-row { display: flex; gap: 0.5rem; margin-top: 1rem; }
+.answer-row input {
+  flex: 1; min-width: 0; padding: 0.8rem 0.9rem; background: var(--surface);
+  border: 1.5px solid var(--line); border-radius: 3px; font-size: 1.15rem;
+}
+.answer-row input:focus { border-color: var(--ink); outline: none; }
+.answer-row button { padding: 0.8rem 1.1rem; border: 0; border-radius: 3px; background: var(--ink); color: var(--bg); font-weight: 700; }
+
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 1rem; }
+.pair button { padding: 0.95rem; border-radius: 3px; font-weight: 700; border: 1.5px solid; background: var(--surface); }
+.pair .yes { border-color: var(--green); color: var(--green); }
+.pair .no { border-color: var(--red); color: var(--red); }
+.next { margin-top: 1rem; }
+.next .primary { margin-top: 0; }
+
+/* Results */
+.score { font-family: var(--display); font-weight: 700; font-size: clamp(3rem, 16vw, 5rem); line-height: 1; margin: 0.5rem 0; }
+.missed { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
+.missed li { padding: 0.65rem 0; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; gap: 1rem; }
+.missed .l { font-family: var(--display); font-weight: 700; }
+.missed .e { color: var(--muted); text-align: right; }
+
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<main class="wrap" id="app" aria-live="polite"></main>
+
+<script>
+const RAW = "# 1\nfluvius|river|fluvial\ninsula|island|insulation, peninsula\noppidum|town|\noceanus|ocean|oceanic\nimperium|empire|imperious\nprovincia|province|provincial\nnumerus|number|numeral\nlittera|letter|literature\nvocabulum|word|vocabulary\ncapitulum|chapter|\nsyllaba|syllable|syllable\nexemplum|example|exemplary\npensum|homework; task|\nmagnus|big; large|magnificent, magnanimous\nparvus|small|\nGraecus|Greek|Greco-\nRomanus|Roman|romance\nLatinus|Latin|Latin\nmulti|much; many|multitask, multifarious\npauci|few|paucity\nunus|one|unicorn, unicycle\nduo|two|dual, duet\ntres|three|trinity, tripod\nmille|thousand; 1000|millennium, millipede\nprimus|first|primary, primitive\nsecundus|second|secondary\ntertius|third|tertiary\nest|is; he, she, it is; there is|\nsunt|are; they are; there are|\nin|in; on|\net|and|et cetera\nsed|but|\nnon|not|\nquoque|also|tu quoque\nubi?|where?|ubiquitous\nquid?|what?|quid pro quo\n# 2\nvir|man|virile\nfemina|woman|feminine\npuer|boy|puerile\npuella|girl|\nfamilia|family|familiar\npater|father|paternal, patron\nmater|mother|maternal, alma mater\nfilius|son|affiliate\nfilia|daughter|filial\nliberi|children|\nservus|slave|servile, servitude\ndominus|master|dominate, dominion\nancilla|maid; female slave|ancillary\ndomina|mistress|dame, madam\nliber|book|library, ex libris\ntitulus|title|title, entitle\npagina|page|pagination\nantiquus|old; ancient|antiquity\nnovus|new|nova, innovate\nceteri|the others; the rest|et cetera\nmeus|my|\ntuus|your|\ncentum|100; hundred|cent, centurion, centipede\nduo, duae|two|dual, duet\ntres, tria|three|triad, triangle\nquis?|who? (masculine)|\nquae?|who? (feminine)|\nqui?|who? (plural)|qui vive\ncuius?|whose?|\nquot?|how many?|quotient\n# 3\nscaena|scene|scene\npersona|person; character|personality\nmamma|mum|\nlaetus, a, um|happy|\niratus, a, um|angry|irate\nprobus, a, um|good|probity\nimprobus, a, um|bad|\ncantat|sings|cantata, chant\npulsat|beats; hits; punches|pulsate, repulse\nplorat|cries|implore, deplore\nridet|laughs; laughs at|ridiculous, deride\nvidet|sees; looks at|video, evidence\nvocat|calls; summons|vocal, evoke\nvenit|comes|venue, convene\ninterrogat|asks; questions|interrogate\nrespondet|responds; answers|respond\ndormit|sleeps|dormant, dormitory\naudit|hears; listens|audible, auditorium\nverberat|beats; strikes|reverberate\nme|me|mea culpa\nte|you|\neum|him|\neam|her|\nneque|and not; nor|\niam|now; already|\ncur?|why?|\nquia|because|\nhic|here|\nqui|who; which (masculine)|\nquae|who; which (feminine)|\nquem|whom (masculine)|\nquam|whom (feminine)|\nnominativus|nominative|\naccusativus|accusative|\nverbum|word; verb|verbal, verbatim\n# 4\nsacculus, i m.|little bag; purse|satchel\npecunia, ae f.|money|pecuniary, impecunious\nnummus, i m.|coin|numismatic\nmensa, ae f.|table|\nbaculum, i n.|staff; stick|\nvacuus, a, um|empty|vacuum, evacuate\nbonus, a, um|good|bonus, bounty\nquattuor|four|quatrain, quarter\nquinque|five|quintuplet\nseptem|seven|September\nocto|eight|octopus\nnovem|nine|November\ndecem|ten|decimal, decimate\nhabet|has; holds|habit\nnumerat|counts|enumerate\nadest|is present; is here|\nabest|is away; is absent|absent\nsalutat|greets|salutation\ntacet|is silent|tacit, reticent\naccusat|accuses|accusation\nponit|puts; places|postpone, opponent\nsumit|takes; picks up|resume, assume\ndiscedit|leaves; departs|\nimperat|commands; orders|imperative, emperor\nparet|obeys|\nnullus|no; none; not any|null, nullify\neius|his; her; its|\nsuus|his; her; its (own)|sui generis\nis|he|\nquod|because; which; that|QED\nrursus|back; again|\ntantum|only|\nsalve|hello; hail|\nvocativus|vocative|\nimperativus|imperative|\nindicativus|indicative|\n# 5\nvilla|country house|village\nhortus|garden|horticulture\nrosa|rose|\nlilium|lily|\nnasus|nose|nasal\nostium|doorway; door|usher\nfenestra|window|defenestrate\natrium|atrium; hall|atrium\nimpluvium|rain basin|\naqua|water|aquatic, aquarium\nperistylum|courtyard with columns|peristyle\ncubiculum|bedroom|cubicle\npulcher, pulchra, pulchrum|beautiful; pretty|pulchritude\nfoedus, a, um|ugly|\nsolus, a, um|alone; only|solo, solitude\nhabitat|lives; lives in|inhabitant\namat|loves|amateur\ncarpit|picks; plucks|\ndelectat|delights|delectable\nagit|drives; does|agent, agile\netiam|also; even|\ncum|with|cum laude\nsine|without|sine qua non\nab|from; away from; by|ab initio\nex|out of; from|ex nihilo\nea|she|\nid|it|\neo|him; it (ablative)|\nii|they (masculine)|\neae|they (feminine)|\neos|them (masculine)|\neas|them (feminine)|\neorum|their (masculine)|\nearum|their (feminine)|\niis|to them; them (ablative)|\nablativus|ablative|\n# 6\nvia, ae f.|road; way|via, viaduct\nmurus, i m.|wall|mural, intramural\nporta, ae f.|gate; door|portal\nlectica, ae f.|litter; sedan chair|\nsaccus, i m.|sack; bag|sack\numerus, i m.|shoulder|humerus\namicus, i m.|friend|amicable\ninimicus, i m.|enemy|inimical\nequus, i m.|horse|equine, equestrian\namica, ae f.|friend (female)|\nlongus, a, um|long|longitude\nmalus, a, um|bad; evil|malice\nfessus, a, um|tired|\nduodecim|twelve|dozen\nit|goes|\neunt|they go|\nportat|carries|import, export\nambulat|walks|ambulance\nvehit|carries; rides|vehicle\ntimet|fears|timid\ntam|so|\nquam|how; than|\ninter|between; among|interval\nprope|near|propinquity\nprocul|far away|\ncircum|around|circumvent\nad|to; towards|\nante|before; in front of|antebellum\npost|behind; after|postscript\na|from; by|\napud|beside; near; at the house of|\nper|through|per capita, per se\nnam|for (because)|\nitaque|therefore; and so|\nautem|but; however|\nunde?|from where?|\nquo?|where to?|\npraepositio|preposition|\nlocativus|locative|\nactivum|active|\npassivum|passive|\n# 7\noculus, i m.|eye|ocular, binocular\nlacrima, ae f.|tear|lachrymal\nspeculum, i n.|mirror|\nostiarius, i m.|doorkeeper|\nmalum, i n.|apple|\npirum, i n.|pear|pear\nosculum, i n.|kiss|osculate\nformosus, a, um|beautiful|\nplenus, a, um|full|plenty, replenish\nexspectat|waits for|expect\ntenet|holds; keeps|tenant\nlacrimat|weeps; sheds tears|\naperit|opens|aperture\nclaudit|closes|include, conclude\nvertit|turns|vertigo\nterget|wipes|detergent\nadvenit|arrives|advent\ninest|is in|\ndat|gives|data\nadit|goes to; approaches|\ncurrit|runs|current, courier\nexit|goes out|exit\nse|himself; herself; itself|per se\nhic|this (masculine)|\nhaec|this (feminine)|\nhoc|this (neuter)|\nimmo|no; on the contrary|\nnonne?|surely? (expects yes)|\net... et|both... and|\nneque... neque|neither... nor|\nsolum|only|\nillic|there|\ne|out of; from|\nei|to him; to her; to it|\ncui|to whom|\ndativus|dative|\n# 8\ntaberna, ae f.|shop|tavern\ngemma, ae f.|gem; jewel|gem\nmargarita, ae f.|pearl|Margaret\ntabernarius, i m.|shopkeeper|\nornamentum, i n.|jewel; ornament|ornamental\nanulus, i m.|ring|annular\nlinea, ae f.|string; line|linear\ndigitus, i m.|finger; toe|digit\ncollum, i n.|neck|collar\npretium, i n.|price|precious, depreciate\nsestertius, i m.|sesterce (coin)|\npecuniosus, a, um|rich|\ngemmatus, a, um|set with a jewel|\nmedius, a, um|middle|medium, median\nquartus, a, um|fourth|quarter\nviginti|twenty|\noctoginta|eighty|octogenarian\nnonaginta|ninety|nonagenarian\nvendit|sells|vendor\nconsistit|stops|\nemit|buys|\naspicit|looks at|aspect\nabit|goes away|\naccipit|receives; takes|accept\nornat|decorates; adorns|ornate\nclamat|shouts|exclamation\nmonstrat|shows; points out|demonstrate\nostendit|shows|ostensible\nconstat|costs|\nconvenit|fits; agrees; meets|convenient\nalius, a, ud|other; another|alias, alien\nille, illa, illud|that; he, she, it|\ntantus, a, um|so big; so great|tantamount\nquantus, a, um|how big; how great|quantity\nsatis|enough|satisfy\nnimis|too; too much|\naut|or|\npronomen|pronoun|pronoun\n# 9\ncampus, i m.|field; plain|campus, camp\npastor, pastoris m.|shepherd|pastoral\ncanis, canis m./f.|dog|canine\novis, ovis f.|sheep|ovine\ncibus, i m.|food|\nherba, ae f.|grass; herb|herbivore\nrivus, i m.|stream; brook|rivulet\npanis, panis m.|bread|pantry\nmons, montis m.|mountain|mount\nvallis, vallis f.|valley|valley\ncollis, collis m.|hill|\narbor, arboris f.|tree|arboretum\nsilva, ae f.|forest; wood|sylvan\nlupus, i m.|wolf|lupine\nsol, solis m.|sun|solar\ncaelum, i n.|sky; heaven|celestial\nterra, ae f.|earth; land|terrain\nnubes, nubis f.|cloud|\numbra, ae f.|shade; shadow|umbrella\nvestigium, i n.|footprint; track|vestige\ntimor, timoris m.|fear|timorous\ndens, dentis m.|tooth|dental, dentist\nclamor, clamoris m.|shout; shouting|clamour\nmodus, i m.|way; manner|mode\nniger, nigra, nigrum|black|noir\nalbus, a, um|white|albino\nundecentum|ninety-nine|\nest / edunt|eats / they eat|edible\nbibit|drinks|imbibe\nlucet|shines|lucid\npetit|makes for; aims at; seeks|petition\nducit|leads|produce, induce\niacet|lies (down)|\nrelinquit|leaves behind|relinquish\nlatrat|barks|\nerrat|wanders; errs|error\nquaerit|seeks; looks for; asks|query, quest\nreperit|finds|\nululat|howls|ululate\nbalat|bleats|\naccurrit|runs to|\nimponit|puts on; puts in|impose\nipse|himself; herself; itself|solipsism\nsupra|above|\nsub|under|submarine\ndum|while|\nut|as; like|\n# 10\nasinus, i m.|donkey|asinine\nleo, leonis m.|lion|leonine\nbestia, ae f.|beast|bestial\nhomo, hominis m.|human being; man|homicide\nfera, ae f.|wild animal|feral\navis, avis f.|bird|aviation\npiscis, piscis m.|fish|Pisces\naquila, ae f.|eagle|aquiline\naer, aeris m.|air|aerial\nala, ae f.|wing|\npes, pedis m.|foot|pedal, pedestrian\ncauda, ae f.|tail|caudal\npetasus, i m.|hat|\ndeus, i m.|god|deity\nmercator, mercatoris m.|merchant|merchant\nnuntius, i m.|messenger|announce\nmare, maris n.|sea|marine\nflumen, fluminis n.|river|flume\nanima, ae f.|soul; breath; life|animate\npulmo, pulmonis m.|lung|pulmonary\nanimal, animalis n.|animal|animal\nnidus, i m.|nest|\nramus, i m.|branch|ramification\nfolium, i n.|leaf|foliage\novum, i n.|egg|oval\npullus, i m.|chick; young animal|pullet\npila, ae f.|ball|pellet\nvox, vocis f.|voice|vocal\nlectus, i m.|bed; couch|\nferus, a, um|wild|ferocious\nvivus, a, um|alive; living|vivid\nmortuus, a, um|dead|mortal\ncrassus, a, um|thick|crass\ntenuis, e|thin|tenuous\nperterritus, a, um|terrified|\ncapere|to take; to catch|capture\nvolare|to fly|volatile\nnatare|to swim|natation\nmovere|to move|movement\nfacere|to make; to do|factory\nvivere|to live|vivacious\nspirare|to breathe|respiration\nparere|to give birth to; to lay (eggs)|parent\nludere|to play|ludicrous\ncanere|to sing|chant\naudere|to dare|audacious\noccultare|to hide|occult\nascendere|to climb; to go up|ascend\nsustinere|to hold up; to support|sustain\ncadere|to fall|cadence, decay\npotest|is able; can|potent\npossunt|they are able; they can|\nvult|wants|\nvolunt|they want|volunteer\nnecesse est|it is necessary|necessary\nnemo|no one; nobody|\ncum|when|\nenim|for (because)|\nergo|therefore|ergo\ninfinitivus|infinitive|\n# 11\ncorpus, corporis n.|body|corpse, corporal\nmembrum, i n.|limb|member\nbracchium, i n.|arm|bracelet\ncrus, cruris n.|leg|\nmanus, us f.|hand|manual, manuscript\ncaput, capitis n.|head|capital, captain\nauris, auris f.|ear|aural\nos, oris n.|mouth|oral\ncapillus, i m.|hair|capillary\nfrons, frontis f.|forehead|frontal\ngena, ae f.|cheek|\ncerebrum, i n.|brain|cerebral\nlabrum, i n.|lip|labial\nlingua, ae f.|tongue; language|linguist\npectus, pectoris n.|chest|pectoral\ncor, cordis n.|heart|cordial\nsanguis, sanguinis m.|blood|sanguine\nvena, ae f.|vein|intravenous\ncolor, coloris m.|colour|colour\niecur, iecoris n.|liver|\nventer, ventris m.|belly; stomach|ventriloquist\nviscera, viscerum n. pl.|internal organs|visceral\nmedicus, i m.|doctor|medical\npoculum, i n.|cup|\nculter, cultri m.|knife|cutlery\nhumanus, a, um|human|humane\nstultus, a, um|foolish; stupid|stultify\nruber, rubra, rubrum|red|ruby\nsanus, a, um|healthy|sane\naeger, aegra, aegrum|sick; ill|\nnoster, nostra, nostrum|our|\nbene|well|benefit\nmale|badly|malevolent\nfluere|to flow|fluid\nsanare|to heal; to cure|sanatorium\nsedere|to sit|sedentary\nstare|to stand|statue\ntangere|to touch|tangible\narcessere|to send for; to summon|\niubere|to order; to command|\nrevenire|to come back|revenue\naegrotare|to be ill|\ndicere|to say|diction, contradict\nspectare|to look at; to watch|spectator\ndolere|to hurt; to be in pain|doleful\napponere|to place on|\nsentire|to feel; to perceive|sensitive\nhorrere|to dread; to shudder at|horrible\npalpitare|to throb|palpitation\nputare|to think|compute\ngaudere|to rejoice; to be glad|\ndetergere|to wipe clean|detergent\nposse|to be able|possible\nmodo|just; only|\nsuper|above; on top of|superior\ninfra|below|inferior\nde|from; down from; about|\natque|and|\nnec|and not; nor|\n# 12\nfrater, fratris m.|brother|fraternity\nsoror, sororis f.|sister|sorority\nnomen, nominis n.|name|nominal\npraenomen, praenominis n.|first name|\ncognomen, cognominis n.|surname|cognomen\navunculus, i m.|uncle|avuncular\nmiles, militis m.|soldier|military\nscutum, i n.|shield|\ngladius, i m.|sword|gladiator\npilum, i n.|javelin|\narma, armorum n. pl.|weapons; arms|armament\narcus, us m.|bow|archer\nsagitta, ae f.|arrow|Sagittarius\npugnus, i m.|fist|pugnacious\nhasta, ae f.|spear|\npedes, peditis m.|foot soldier|pedestrian\neques, equitis m.|horseman|equestrian\npars, partis f.|part|particle, partial\nfinis, finis m.|boundary; end|final, infinite\npatria, ae f.|homeland; native land|patriot, expatriate\nhostis, hostis m.|enemy|hostile\nbellum, i n.|war|belligerent\nexercitus, us m.|army|\ndux, ducis m.|leader|duke\ncastra, castrorum n. pl.|camp|Chester\npassus, us m.|step; pace|pace\nfossa, ae f.|ditch|fosse\nvallum, i n.|rampart|wall\nequitatus, us m.|cavalry|\nimpetus, us m.|attack|impetus\nmetus, us m.|fear|\nversus|towards|\nmilia, milium n. pl.|thousands|million\ntristis, e|sad|\narmatus, a, um|armed|armada\nbrevis, e|short|brief, brevity\ngravis, e|heavy; serious|gravity\nlevis, e|light|levity, alleviate\nbarbarus, a, um|foreign; barbarian|barbaric\naltus, a, um|high; deep|altitude\nlatus, a, um|wide; broad|latitude\nfortis, e|strong; brave|fortitude\nvester, vestra, vestrum|your (plural)|\nferre|to carry; to bear|transfer, defer\npugnare|to fight|pugnacious\nincolere|to inhabit|\ndividere|to divide|divide\noppugnare|to attack|\nmetuere|to fear|\nmilitare|to serve as a soldier|militate\ndefendere|to defend|defend\niacere|to throw|eject, reject\nexpugnare|to conquer; to storm|\nfugere|to flee; to run away|fugitive\ncontra|against|contradict\nac|and|\nadiectivum|adjective|\ncomparativus|comparative|\n# 13\nannus, i m.|year|annual\nmensis, mensis m.|month|semester\ndies, diei m.|day|diary\nsaeculum, i n.|age; generation; century|secular\ntempus, temporis n.|time|temporal, tempo\nfacies, faciei f.|face|superficial\nmane|in the morning|\nvesper, vesperi m.|evening|vespers\nnox, noctis f.|night|nocturnal\ninitium, i n.|beginning|initial\nhora, ae f.|hour|hour\nmeridies, meridiei m.|midday; noon|a.m., p.m.\nluna, ae f.|moon|lunar\nstella, ae f.|star|stellar\nlux, lucis f.|light|lucid\nforma, ae f.|shape; form|formal\nKalendae, arum f. pl.|the 1st of the month|calendar\nIdus, Iduum f. pl.|the 13th or 15th of the month|Ides\nNonae, arum f. pl.|the 5th or 7th of the month|\naequinoctium, i n.|equinox|equinox\naestas, aestatis f.|summer|aestivate\nhiems, hiemis f.|winter|\nver, veris n.|spring|vernal\nautumnus, i m.|autumn|autumnal\nimber, imbris m.|rain; shower|\nnix, nivis f.|snow|Nevada\nlacus, us m.|lake|lake\nglacies, glaciei f.|ice|glacier\nurbs, urbis f.|city|urban\npostremus, a, um|last|\ndimidius, a, um|half|demi-\naequus, a, um|equal|equal, equity\nclarus, a, um|bright; clear|clarity\ntotus, a, um|whole; entire|total\nobscurus, a, um|dark|obscure\nexiguus, a, um|small; scanty|\ncalidus, a, um|warm; hot|calorie\nfrigidus, a, um|cold|frigid\nindeclinabilis|indeclinable|\nundecim|eleven|\ntriginta|thirty|\nsexaginta|sixty|\nducenti|two hundred|\ntrecenti|three hundred|\nquintus, a, um|fifth|quintet\nsextus, a, um|sixth|\nseptimus, a, um|seventh|\noctavus, a, um|eighth|octave\nnonus, a, um|ninth|\ndecimus, a, um|tenth|decimal\nundecimus, a, um|eleventh|\nduodecimus, a, um|twelfth|\nnominare|to name|nominate\nillustrare|to light up|illustrate\nincipere|to begin|inception\noperire|to cover|\nvelle|to want; to wish|volition\nerat|was|\nerant|they were|\nvel|or|\ntunc|then|\nnunc|now|\nigitur|therefore|\nitem|likewise; also|\nquando|when|quandary\nsuperlativus|superlative|\n# 14\ngallus, i m.|cockerel; rooster|\nvestimentum, i n.|garment; clothing|vestment\ntunica, ae f.|tunic|tunic\ntoga, ae f.|toga|\ncalceus, i m.|shoe|\nparens, parentis m./f.|parent|parent\ntabula, ae f.|writing tablet|table\nstilus, i m.|stylus; pen|style\nregula, ae f.|ruler|regular\nres, rei f.|thing; matter|republic\naperio, aperire, aperui, apertum|to open|aperture\nclaudo, claudere, clausi, clausum|to close|clause\nsordidus, a, um|dirty|sordid\npurus, a, um|pure; clean|purity\nnudus, a, um|naked; bare|nude\ntogatus, a, um|wearing a toga|\ndexter, dextra, dextrum|right; right hand|dexterity\nsinister, sinistra, sinistrum|left; left hand|sinister\nomnis, e|every; all|omnivore\ncubo, cubare, cubui, cubitum|to lie down; to recline|incubate\nvigilo, vigilare, vigilavi, vigilatum|to stay awake|vigilant\nvaleo, valere, valui|to be strong; to be well|valid\nexcito, excitare, excitavi, excitatum|to wake up; to rouse|excite\nsurgo, surgere, surrexi, surrectum|to rise; to get up|resurrection\naffero, afferre, attuli, allatum|to bring|\nlavo, lavare, lavi, lautum|to wash|lavatory\nmergo, mergere, mersi, mersum|to dip; to sink|submerge\nsoleo, solere, solitus sum|to be in the habit of; usually|\nfrigeo, frigere|to be cold|frigid\nposco, poscere, poposci|to ask for; to demand|\nvestio, vestire, vestivi, vestitum|to clothe; to dress|vest\ninduo, induere, indui, indutum|to put on (clothes)|\ngero, gerere, gessi, gestum|to wear; to carry|gesture\ninquit|says|\nuterque|each (of two); both|\nneuter, neutra, neutrum|neither|neutral\nalter, altera, alterum|the one; the other (of two)|alternate\nuter, utra, utrum?|which (of two)?|\nmihi|to me|\ntibi|to you|\nmecum|with me|\ntecum|with you|\nsecum|with him; with herself|\nnihil|nothing|nihilist\nquomodo|how|\nhodie|today|\nadhuc|still; so far|\nprimum|first; at first|\ndeinde|then; next|\npraeter|past; except|\nan|or|\nvale|goodbye|valediction\nparticipium|participle|\n# 15\nludus, i m.|school; game|ludicrous\nmagister, magistri m.|teacher; master|magistrate\ndiscipulus, i m.|pupil; student|disciple\nvirga, ae f.|stick; rod|\nsella, ae f.|seat; chair|\nianua, ae f.|door|January, janitor\nverum, i n.|truth|veracity\ntergum, i n.|back|\nlectulus, i m.|bed; couch|\nseverus, a, um|stern; strict|severe\ntacitus, a, um|silent|tacit\nverus, a, um|true; real|verify\nposterior|back; later|posterior\ninferior|lower|inferior\nprior|first; front; earlier|prior\npunio, punire, punivi, punitum|to punish|punish\nconsido, considere, consedi, consessum|to sit down|\nexclamo, exclamare, exclamavi, exclamatum|to shout; to exclaim|exclaim\ndesino, desinere, desii, desitum|to stop; to cease|\nredeo, redire, redii, reditum|to go back; to return|\nreddo, reddere, reddidi, redditum|to give back|render\nrecito, recitare, recitavi, recitatum|to read aloud; to recite|recite\nlicet|it is allowed; one may|licence\nsum|I am|\nes|you are|\nsumus|we are|\nestis|you are (plural)|\nego|I|ego\ntu|you|\nnos|we; us|\nvos|you (plural)|\nnondum|not yet|\nstatim|at once; immediately|stat\ntum|then|\ndomi|at home|domestic\nantequam|before|\nat|but|\nsi|if|\nnisi|if not; unless|\n# 16\nnavis, navis f.|ship|naval\nportus, us m.|harbour|port\nlocus, i m.|place|location\nora, ae f.|coast; shore|\nmerx, mercis f.|goods; merchandise|commerce\nnauta, ae m.|sailor|nautical\nventus, i m.|wind|ventilate\ntempestas, tempestatis f.|storm|tempest\nfluctus, us m.|wave|fluctuate\nvelum, i n.|sail|veil\npuppis, puppis f.|stern (of a ship)|poop deck\ngubernator, gubernatoris m.|helmsman; captain|governor\noriens, orientis m.|the east|orient\noccidens, occidentis m.|the west|occident\nseptentriones, septentrionum m. pl.|the north|\naltum, i n.|the open sea; the deep|\ntonitrus, us m.|thunder|\nfulgur, fulguris n.|lightning|\nsitus, a, um|situated|situation\nsuperus, a, um|upper|superior\ninferus, a, um|lower|inferior\nmaritimus, a, um|of the sea; coastal|maritime\ntranquillus, a, um|calm|tranquil\nturbidus, a, um|stormy; rough|turbid\ncontrarius, a, um|opposite; against|contrary\nserenus, a, um|clear; calm|serene\nater, atra, atrum|black; dark|\nintersum, interesse, interfui|to be between|interest\nappello, appellare, appellavi, appellatum|to call; to name|appeal\nnavigo, navigare, navigavi, navigatum|to sail|navigate\ninfluo, influere, influxi|to flow in|influx\nopperior, opperiri, oppertus sum|to wait for|\nflo, flare, flavi, flatum|to blow|inflate\nturbo, turbare, turbavi, turbatum|to disturb; to stir up|disturb\nimpleo, implere, implevi, impletum|to fill|\negredior, egredi, egressus sum|to go out; to disembark|egress\nguberno, gubernare, gubernavi, gubernatum|to steer; to govern|govern\norior, oriri, ortus sum|to rise|origin\noccido, occidere, occidi, occasum|to set (of the sun)|occident\nconscendo, conscendere, conscendi, conscensum|to board (a ship)|\nproficiscor, proficisci, profectus sum|to set out; to depart|\nsequor, sequi, secutus sum|to follow|sequence, consequence\ncerno, cernere, crevi, cretum|to see; to discern|discern\nlaetor, laetari, laetatus sum|to rejoice; to be glad|\nvereor, vereri, veritus sum|to fear|revere\nintueor, intueri, intuitus sum|to look at; to gaze at|intuition\nlabor, labi, lapsus sum|to slip; to fall|lapse\ncomplector, complecti, complexus sum|to embrace; to hug|\nconsolor, consolari, consolatus sum|to comfort; to console|consolation\nloquor, loqui, locutus sum|to speak; to talk|loquacious\ninvoco, invocare, invocavi, invocatum|to call upon; to invoke|invoke\niacto, iactare, iactavi, iactatum|to throw; to toss|\nhaurio, haurire, hausi, haustum|to draw (water); to scoop up|exhaust\nservo, servare, servavi, servatum|to save; to keep|preserve\nconor, conari, conatus sum|to try; to attempt|\nfio, fieri, factus sum|to become; to happen|fiat\npaulum|a little|\nsemper|always|semper fidelis\nsimul|at the same time|simultaneous\nvix|hardly; barely|\npraeterea|besides|\niterum|again|\nsive|or if; or|\nvero|really; however|\npropter|because of|\ndeponens|deponent|\n# 17\nresponsum, i n.|answer|response\nas, assis m.|as (small copper coin)|\ndenarius, i m.|denarius (silver coin)|dinar\ndoctus, a, um|learned; educated|doctor\nindoctus, a, um|unlearned; ignorant|\npiger, pigra, pigrum|lazy|\nprudens, prudentis|sensible; wise|prudent\nindustrius, a, um|hard-working|industrious\nrectus, a, um|right; correct|correct\npravus, a, um|wrong; bad|depraved\nfacilis, e|easy|facile, facility\ndifficilis, e|difficult|difficult\nabsens, absentis|absent|absence\ncertus, a, um|certain; sure|certain\nincertus, a, um|uncertain|\nlargus, a, um|generous|largesse\ncentesimus, a, um|hundredth|\ntredecim|thirteen|\nquattuordecim|fourteen|\nquindecim|fifteen|\nsedecim|sixteen|\nseptendecim|seventeen|\nduodeviginti|eighteen|\nundeviginti|nineteen|\nquadraginta|forty|\nquinquaginta|fifty|\nseptuaginta|seventy|\nquadringenti|four hundred|\nquingenti|five hundred|\nsescenti|six hundred|\nseptingenti|seven hundred|\noctingenti|eight hundred|\nnongenti|nine hundred|\ndisco, discere, didici|to learn|disciple\ndoceo, docere, docui, doctum|to teach|doctrine\nscio, scire, scivi, scitum|to know|science\nnescio, nescire, nescivi|not to know|\ntollo, tollere, sustuli, sublatum|to lift; to raise|extol\ninterpello, interpellare, interpellavi, interpellatum|to interrupt|\nlaudo, laudare, laudavi, laudatum|to praise|laud, applaud\ncogito, cogitare, cogitavi, cogitatum|to think|cogitate\nreprehendo, reprehendere, reprehendi, reprehensum|to blame; to criticise|reprehensible\npromo, promere, prompsi, promptum|to bring out|prompt\noportet, oportere, oportuit|it is right; one should|\ncomputo, computare, computavi, computatum|to calculate|compute\nrepono, reponere, reposui, repositum|to put back|repository\nlargior, largiri, largitus sum|to give generously|\ndemonstro, demonstrare, demonstravi, demonstratum|to show; to point out|demonstrate\npartior, partiri, partitus sum|to share; to divide|partition\nquisque|each|\ntot|so many|\npostremo|finally|\nrecte|rightly; correctly|\nprave|wrongly|\naeque|equally|\nusque|all the way; up to|\nnumquam|never|\nsaepe|often|\nquamquam|although|\nquare?|why?|\n# 18\nvocalis, vocalis f.|vowel|vocal\nconsonans, consonantis f.|consonant|consonant\nzephyrus, i m.|west wind|zephyr\nsententia, ae f.|opinion; sentence|sentence\nerus, i m.|master; owner|\nmendum, i n.|mistake; error|amend\ncera, ae f.|wax|\nmateria, ae f.|material; wood|material\napis, apis f.|bee|apiary\nferrum, i n.|iron|ferrous\nepistula, ae f.|letter|epistle\ncalamus, i m.|reed pen|\ncharta, ae f.|paper|charter, chart\npapyrus, i m.|papyrus|paper\nmerces, mercedis f.|pay; wages|mercenary\nrarus, a, um|rare|rare\nfrequens, frequentis|frequent; numerous|frequent\nvarius, a, um|different; various|variety\nturpis, e|ugly; shameful|turpitude\nmollis, e|soft|mollify\ndurus, a, um|hard|durable\nqualis, e|what kind of|quality\ntalis, e|such|\nimpiger, impigra, impigrum|active; energetic|\niungo, iungere, iunxi, iunctum|to join|junction\nconiungo, coniungere, coniunxi, coniunctum|to connect; to join together|conjunction\nsignifico, significare, significavi, significatum|to mean; to indicate|significant\nlego, legere, legi, lectum|to read|legible\nintellego, intellegere, intellexi, intellectum|to understand|intelligent\nscribo, scribere, scripsi, scriptum|to write|scribe\ndicto, dictare, dictavi, dictatum|to dictate|dictation\nexaudio, exaudire, exaudivi, exauditum|to hear clearly|\ndesum, deesse, defui|to be missing|\naddo, addere, addidi, additum|to add|addition\ncorrigo, corrigere, correxi, correctum|to correct|incorrigible\npremo, premere, pressi, pressum|to press|pressure\nefficio, efficere, effeci, effectum|to bring about; to make|effect, efficient\nanimadverto, animadvertere, animadverti, animadversum|to notice|\nsupersum, superesse, superfui|to be left over|\ndeleo, delere, delevi, deletum|to erase; to destroy|delete\nsigno, signare, signavi, signatum|to mark; to seal|signature\nimprimo, imprimere, impressi, impressum|to press into; to imprint|impress\nidem, eadem, idem|the same|identical\nquaeque|each (feminine)|\nquodque|each (neuter)|\nsic|so; thus|sic\nita|so; thus|\nquoties|how often; as often as|\ntoties|so often|\nsemel|once|\nbis|twice|biannual, bicycle\nter|three times|\nquater|four times|\nquinquies|five times|\nsexies|six times|\ndecies|ten times|\nadverbium, i n.|adverb|adverbial\n# 19\nuxor, uxoris f.|wife|uxorious\nmaritus, i m.|husband|marital\ncolumna, ae f.|column|column\nsignum, i n.|statue; sign|signal\ntectum, i n.|roof|protect\ndea, ae f.|goddess|\nconiunx, coniugis m./f.|husband; wife; spouse|conjugal\nmatrona, ae f.|married woman|matron\namor, amoris m.|love|amorous\npulchritudo, pulchritudinis f.|beauty|pulchritude\nvirgo, virginis f.|girl; young woman|virgin\ndomus, us f.|house; home|domestic\ntemplum, i n.|temple|temple\nforum, i n.|forum; marketplace|forum, forensic\ndonum, i n.|gift; present|donation\nflos, floris m.|flower|floral\nmelior|better|ameliorate\npeior|worse|pejorative\noptimus|best|optimist\npessimus|worst|pessimist\nmaior|bigger; greater|majority\nminor|smaller; less|minority\nmaximus|biggest; greatest|maximum\nminimus|smallest; least|minimum\nmagnificus|splendid; magnificent|magnificent\nplures|more|plural\nplurimi|very many; most|\ndives, divitis|rich|\npauper, pauperis|poor|pauper, poverty\nmiser, misera, miserum|unhappy; wretched|miserable\nbeatus, a, um|happy; blessed|beatific\ndignus, a, um|worthy|dignity\ngracilis, e|slender|\nconvenio, convenire, conveni, conventum|to meet; to agree|convene\npossideo, possidere, possedi, possessum|to possess; to own|possess\nmitto, mittere, misi, missum|to send; to throw|missile, mission\nremitto, remittere, remisi, remissum|to send back|remit\nosculor, osculari, osculatus sum|to kiss|\nminuo, minuere, minui, minutum|to reduce; to lessen|diminish\naugeo, augere, auxi, auctum|to increase|augment\nopus esse|to be needed|\nmi|my (vocative)|\nullus, a, um|any|\ntamen|however; nevertheless|\ncotidie|every day; daily|\nminus|less|minus\nplus|more|surplus\nerga|towards|\npraesens|present|present\npraeteritum|past (tense)|preterite\n# 20\ninfans, infantis m./f.|baby; infant|infant\ncunae, cunarum f. pl.|cradle|\nsomnus, i m.|sleep|insomnia\nlac, lactis n.|milk|lactose\nmulier, mulieris f.|woman|\nnutrix, nutricis f.|nurse|nutrition\ngradus, us m.|step|grade, gradual\nsermo, sermonis m.|conversation; talk|sermon\nfiliola, ae f.|little daughter|\nfiliolus, i m.|little son|\ncolloquium, i n.|conversation|colloquial\nofficium, i n.|duty|office\nsilentium, i n.|silence|silence\nparvulus, a, um|very small; tiny|\nnecessarius, a, um|necessary|necessary\nalienus, a, um|someone else's; foreign|alien\nfuturus, a, um|future; about to be|future\numidus, a, um|wet; damp|humid\nfor, fari, fatus sum|to speak|affable\ncareo, carere, carui|to be without; to lack|\npostulo, postulare, postulavi, postulatum|to demand|postulate\nvagio, vagire, vagivi|to cry; to wail|\nalo, alere, alui, altum|to feed; to nourish|\ncolloquor, colloqui, collocutus sum|to talk; to converse|colloquial\nvolo|I want|volition\nvis|you want|\nvolumus|we want|\nvultis|you (plural) want|\nmaneo, manere, mansi, mansum|to stay; to remain|mansion\npergo, pergere, perrexi, perrectum|to go on; to proceed|\ncuro, curare, curavi, curatum|to take care of; to look after|curator\ndebeo, debere, debui, debitum|to owe; ought|debt\noccurro, occurrere, occurri, occursum|to run to meet; to meet|occur\nsileo, silere, silui|to be silent|silent\nadveho, advehere, advexi, advectum|to carry; to bring|\nrevertor, reverti, reversus sum|to turn back; to return|revert\ndiligo, diligere, dilexi, dilectum|to love; to be fond of|\ndecet|it is proper; it is fitting|decent\nnolo, nolle, nolui|to not want; to be unwilling|\ndomo|from home|\nmox|soon|\nmagis|more|\nraro|rarely; seldom|rare\ncras|tomorrow|procrastinate\nadversus|towards; against|adverse\nnoli, nolite|do not (command)|\nsive... sive|either... or; whether... or|\nprofecto|certainly; indeed|\nminime|not at all; no|minimal\nuna cum|together with|\n# 21\nvestis, vestis f.|clothing; clothes|vest\ngenu, us n.|knee|genuflect\nhumus, i f.|ground; earth|humus\ncruor, cruoris m.|blood|\nbos, bovis m./f.|ox; cow|bovine\ncornu, us n.|horn|cornucopia\ncausa, ae f.|cause; reason|cause\nporcus, i m.|pig|pork\npugna, ae f.|fight; battle|pugnacious\nsordes, sordis f.|dirt; filth|sordid\nsolum, i n.|floor; ground|soil\ntabella, ae f.|small tablet|\nmundus, a, um|clean; neat|\ncandidus, a, um|white; bright|candid\nangustus, a, um|narrow|\nvalidus, a, um|strong|valid\nindignus, a, um|unworthy|indignant\nfalsus, a, um|false; wrong|false\ncognosco, cognoscere, cognovi, cognitum|to get to know; to recognise|recognise\nconspicio, conspicere, conspexi, conspectum|to catch sight of; to see|conspicuous\nexcuso, excusare, excusavi, excusatum|to excuse|excuse\nvinco, vincere, vici, victum|to conquer; to defeat|invincible\nnarro, narrare, narravi, narratum|to tell; to relate|narrator\nmuto, mutare, mutavi, mutatum|to change|mutate\nmentior, mentiri, mentitus sum|to lie|\ncredo, credere, credidi, creditum|to believe; to trust|credible\nfallo, fallere, fefelli, falsum|to deceive|fallacy\ndubito, dubitare, dubitavi, dubitatum|to doubt|dubious\nfuisse|to have been|\naio, ais, ait, aiunt|to say; say yes|\nain'?|really?|\naliquis|someone|\naliquid|something|\nhumi|on the ground|\ninterim|meanwhile|interim\npostquam|after|\nperfectum|perfect (tense)|perfect\nimperfectum|imperfect (tense)|imperfect\n# 22\nferox, ferocis|fierce|ferocious\nferreus, a, um|made of iron|ferrous\naureus, a, um|golden|\nligneus, a, um|wooden|\ncustodio, custodire, custodivi, custoditum|to guard|custodian\nadmitto, admittere, admisi, admissum|to let in; to admit|admit\nrogito, rogitare, rogitavi, rogitatum|to keep asking|\nfremo, fremere, fremui|to roar; to growl|\nmordeo, mordere, momordi, morsum|to bite|morsel\nretineo, retinere, retinui, retentum|to hold back|retain\ncaveo, cavere, cavi, cautum|to beware (of)|caveat, caution\nresisto, resistere, restiti|to resist; to stand still|resist\nsolvo, solvere, solvi, solutum|to untie; to release; to pay|solve\nterreo, terrere, terrui, territum|to frighten; to terrify|terror\naccedo, accedere, accessi, accessum|to approach|access\nsalio, salire, salui, saltum|to jump; to leap|salient\nrumpo, rumpere, rupi, ruptum|to break; to burst|rupture\ncedo, cedere, cessi, cessum|to go; to give way|concede\nprehendo, prehendere, prehendi, prehensum|to seize; to grasp|apprehend\nrecedo, recedere, recessi, recessum|to withdraw; to go back|recede\nprocedo, procedere, processi, processum|to go forward; to advance|proceed\nsino, sinere, sivi, situm|to allow; to let|\nderideo, deridere, derisi, derisum|to laugh at; to mock|deride\ntremo, tremere, tremui|to tremble|tremor\npello, pellere, pepuli, pulsum|to push; to drive away|expel, propel\nremoveo, removere, removi, remotum|to remove|remote\narbitror, arbitrari, arbitratus sum|to think; to judge|arbitrate\nscindo, scindere, scidi, scissum|to tear; to split|scissors\niste, ista, istud|that (of yours)|\nscilicet|of course; certainly|\nantea|before; formerly|\npostea|afterwards|\nprius|earlier; first|prior\ntandem|at last; finally|\nnuper|recently|\nforis, foris f.|door|\nforas|outside; out of doors|\nsicut|as; just as|\nquin|why not; indeed|\nextra|outside|extraordinary\nintra|inside; within|intravenous\nsupinus, a, um|lying on one's back|supine\n# 23\nlittera, ae f.|letter (of the alphabet); letter|letter\nvultus, us m.|face; expression|\nlaus, laudis f.|praise|laud\nfactum, i n.|deed; act|fact\npudor, pudoris m.|shame|\npromissum, i n.|promise|promise\nverbera, verberum n. pl.|lashes; beating|reverberate\nclavis, clavis f.|key|clavicle\ncomes, comitis m./f.|companion|\ninteger, integra, integrum|whole; untouched|integer, integral\npallidus, a, um|pale|pallid\nplanus, a, um|flat; clear|plain\nsuperior|higher|superior\ntrado, tradere, tradidi, traditum|to hand over|tradition\ndimitto, dimittere, dimisi, dimissum|to send away; to dismiss|dismiss\ncontineo, continere, continui, contentum|to hold; to contain|contain\nsalutem dicere|to send greetings|\npalleo, pallere, pallui|to be pale; to turn pale|pallor\nmereo, merere, merui, meritum|to deserve; to earn|merit\naverto, avertere, averti, aversum|to turn away|avert\ninscribo, inscribere, inscripsi, inscriptum|to write on|inscription\nnego, negare, negavi, negatum|to deny; to say no|negate\nfateor, fateri, fassus sum|to admit; to confess|\nperdo, perdere, perdidi, perditum|to lose; to destroy|perdition\npudet, pudere, puduit|to make ashamed|impudent\nrubeo, rubere|to be red; to blush|\npromitto, promittere, promisi, promissum|to promise|promise\nincludo, includere, inclusi, inclusum|to shut in; to enclose|include\ncomitor, comitari, comitatus sum|to accompany|\nillinc|from there|\nhinc|from here|\nquidnam?|what?|\nquisnam?|who?|\nfortasse|perhaps|\numquam|ever|\nposthac|after this; in future|\nantehac|before this|\nheri|yesterday|\nob|because of|\n# 24\nlatus, lateris n.|side|lateral\nsonus, i m.|sound|sonic\nstrepitus, us m.|noise; din|\ndolor, doloris m.|pain|dolorous\nos, ossis n.|bone|osteology\ntumultus, us m.|uproar; commotion|tumult\naegrotus, a, um|sick; ill|\nlaevus, a, um|left|\npar, paris|equal|par\nimpar, imparis|unequal|\nsubitus, a, um|sudden|\ncruentus, a, um|bloody|\nconverto, convertere, converti, conversum|to turn|convert\nmiror, mirari, miratus sum|to wonder at; to be surprised|admire\nrecumbo, recumbere, recubui|to lie down|recumbent\npercutio, percutere, percussi, percussum|to strike; to hit|percussion\nfrango, frangere, fregi, fractum|to break|fracture\nfleo, flere, flevi, fletum|to cry; to weep|\npatior, pati, passus sum|to suffer; to endure|patient\nignoro, ignorare, ignoravi, ignoratum|not to know|ignore\nnosco, noscere, novi, notum|to get to know|notion\ncupio, cupere, cupivi, cupitum|to desire; to want|cupid\niuxta|next to; near|juxtapose\ndenuo|again; anew|\nsubito|suddenly|\ncontinuo|immediately|continuous\ncerto|certainly|\nprimo|at first|\nvalde|very; strongly|\naliter|otherwise|\nintus|inside; within|\netsi|even if; although|\nceterum|besides|\nplusquamperfectum|pluperfect|\n# 25\nfabula, ae f.|story|fable\nagnus, i m.|lamb|\ncurrus, us m.|chariot|\nmoenia, moenium n. pl.|city walls|\nmonstrum, i n.|monster|monster\ntaurus, i m.|bull|Taurus\nlabyrinthus, i m.|labyrinth; maze|labyrinth\naedificium, i n.|building|edifice\nmors, mortis f.|death|mortal\nrex, regis m.|king|regal\nexpugnatio, expugnationis f.|capture (of a town)|\ngloria, ae f.|glory; fame|glory\nauxilium, i n.|help|auxiliary\ncivis, civis m./f.|citizen|civic\nexitus, us m.|way out; exit|exit\nfilum, i n.|thread|filament\nmora, ae f.|delay|\nnex, necis f.|death; murder|internecine\nlitus, litoris n.|shore; beach|littoral\nsaxum, i n.|rock; stone|\nconspectus, us m.|sight; view|\ncupiditas, cupiditatis f.|desire; passion|cupidity\nnarratio, narrationis f.|story; narrative|narration\nhumilis, e|low; humble|humility\ntimidus, a, um|timid; fearful|timid\nterribilis, e|terrible; frightening|terrible\nmirabilis, e|wonderful; amazing|miracle\nsaevus, a, um|savage; cruel|\ncupidus, a, um|desirous; eager|\nparatus, a, um|ready; prepared|\nrego, regere, rexi, rectum|to rule; to guide|regime\ntraho, trahere, traxi, tractum|to drag; to pull|tractor, extract\ninterficio, interficere, interfeci, interfectum|to kill|\naedifico, aedificare, aedificavi, aedificatum|to build|edifice\nvoro, vorare, voravi, voratum|to swallow; to devour|devour\npateo, patere, patui|to be open|patent\nneco, necare, necavi, necatum|to kill|internecine\nconstituo, constituere, constitui, constitutum|to set up; to decide|constitution\noccido, occidere, occidi, occisum|to kill|\npolliceor, polliceri, pollicitus sum|to promise|\nprospicio, prospicere, prospexi, prospectum|to look out; to look ahead|prospect\ndescendo, descendere, descendi, descensum|to go down|descend\nmaereo, maerere|to grieve; to be sad|\ndesero, deserere, deserui, desertum|to leave; to desert|desert\nobliviscor, oblivisci, oblitus sum|to forget|oblivion\ncoepi, coepisse|began|\ncomplures, complura|several|\nfors, fortis f.|chance|fortuitous\nquotannis|every year|\nolim|once; once upon a time|\nibi|there|\nilluc|to there; there|\nhuc|to here; here|\nbrevi|shortly; soon|brevity\n# 26\nfuga, ae f.|flight; escape|fugitive\nconsilium, i n.|plan; advice|counsel\ncarcer, carceris m.|prison|incarcerate\norbis, orbis m.|circle; world|orbit\nnatura, ae f.|nature|natural\nars, artis f.|skill; art|art\nopus, operis n.|work|opus\npenna, ae f.|feather|pen\nignis, ignis m.|fire|ignite\nlacertus, i m.|upper arm|\nlibertas, libertatis f.|freedom|liberty\nmultitudo, multitudinis f.|large number; crowd|multitude\npaeninsula, ae f.|peninsula|peninsula\ncasus, us m.|fall; chance; accident|case\nceler, celeris, celere|swift; fast|accelerate\nreliquus, a, um|remaining; the rest of|relic\naudax, audacis|bold; daring|audacious\nliber, libera, liberum|free|liberty\nstudiosus, a, um|keen; eager|studious\ningens, ingentis|huge|\ninfimus, a, um|lowest|\nsummus, a, um|highest; top of|summit\ncautus, a, um|cautious; careful|cautious\ntemerarius, a, um|reckless; rash|temerity\npropinquus, a, um|near|propinquity\npersequor, persequi, persecutus sum|to pursue|persecute\nconsequor, consequi, consecutus sum|to follow; to overtake|consecutive\nconficio, conficere, confeci, confectum|to finish; to complete|confection\nconsumo, consumere, consumpsi, consumptum|to use up; to consume|consume\ninvenio, invenire, inveni, inventum|to find; to discover|invent\neffugio, effugere, effugi|to escape (from)|\niuvo, iuvare, iuvi, iutum|to help|\nexcogito, excogitare, excogitavi, excogitatum|to think out; to devise|\nimitor, imitari, imitatus sum|to imitate; to copy|imitate\nevolo, evolare, evolavi, evolatum|to fly out; to fly away|\nperficio, perficere, perfeci, perfectum|to complete; to accomplish|perfect\nmollio, mollire, mollivi, mollitum|to soften|emollient\nfigo, figere, fixi, fixum|to fasten; to fix|fix\nlevo, levare, levavi, levatum|to lift; to raise|elevate\nuro, urere, ussi, ustum|to burn|combustion\nsuspicio, suspicere, suspexi, suspectum|to look up (at)|suspect\ndespicio, despicere, despexi, despectum|to look down (on)|despise\nquatio, quatere, quassum|to shake|\naberro, aberrare, aberravi, aberratum|to stray; to wander off|aberration\nrevoco, revocare, revocavi, revocatum|to call back|revoke\nvideri|to seem; to appear|\nesto|be! (command)|\nquisquam|anyone|\nsursum|upwards; up|\nhaud|not|\npaene|almost|peninsula\nquidem|indeed; certainly|\ntamquam|as; like; as if|\nquoniam|since; because|\nverum|but|\nsin|but if|\ntrans|across|transatlantic\ngerundium, i n.|gerund|gerund\n# 27\nager, agri m.|field|agriculture\nfrumentum, i n.|grain; corn|\nagricola, ae m.|farmer|agriculture\nnegotium, i n.|business; work|negotiate\naratrum, i n.|plough|\ninstrumentum, i n.|tool; equipment|instrument\nsemen, seminis n.|seed|disseminate\nfalx, falcis f.|sickle|\nregio, regionis f.|region; area|region\nfruges, frugum f. pl.|crops; fruits of the earth|\npecus, pecoris n.|cattle; livestock|\npabulum, i n.|fodder|\nlana, ae f.|wool|lanolin\ncopia, ae f.|plenty; abundance|copious\nvitis, vitis f.|vine|viticulture\nvinea, ae f.|vineyard|\nuva, ae f.|grape|\nvinum, i n.|wine|vinegar\npraedium, i n.|estate; farm|\nlabor, laboris m.|work; toil|labour\nrus, ruris n.|the country; countryside|rural\notium, i n.|leisure; free time|\ncolonus, i m.|farmer; tenant|colony\npatientia, ae f.|patience|patience\ncura, ae f.|care; worry|cure\npreces, precum f. pl.|prayers; requests|\ncalor, caloris m.|heat; warmth|calorie\nfrigus, frigoris n.|cold|frigid\ngrex, gregis m.|flock; herd|gregarious\namoenus, a, um|pleasant; lovely|amenity\nmaturus, a, um|ripe; mature|mature\nrudis, e|undeveloped; untrained|rudimentary\nfertilis, e|fertile|fertile\nsuburbanus, a, um|near the city|suburban\nurbanus, a, um|of the city; refined|urban\npatiens, patientis|patient; enduring|patient\nrusticus, a, um|of the country; rural|rustic\ngravidus, a, um|pregnant|\nsiccus, a, um|dry|\nneglegens, neglegentis|careless|negligent\nnequam|worthless; wicked|\nimmaturus, a, um|unripe|immature\ninhumanus, a, um|uncivilised; unkind|inhumane\ntricesimus, a, um|thirtieth|\nquiesco, quiescere, quievi, quietum|to rest|quiet\ncingo, cingere, cinxi, cinctum|to surround; to encircle|cinch\ncresco, crescere, crevi, cretum|to grow; to increase|crescendo\nmeto, metere, messui, messum|to reap; to harvest|\naro, arare, aravi, aratum|to plough|arable\nsero, serere, sevi, satum|to sow; to plant|\ncolo, colere, colui, cultum|to cultivate; to tend|cultivate\nspargo, spargere, sparsi, sparsum|to scatter; to sprinkle|sparse\nuti|so that; as|\npasco, pascere, pavi, pastum|to feed; to graze|pasture\ninveho, invehere, invexi, invectum|to carry in; to import|\nrigo, rigare, rigavi, rigatum|to water; to irrigate|irrigate\nlaboro, laborare, laboravi, laboratum|to work; to toil|laboratory\nexistimo, existimare, existimavi, existimatum|to think; to consider|estimate\ncenseo, censere, censui, censum|to think; to be of the opinion|census\nproicio, proicere, proieci, proiectum|to throw away; to throw forward|project\noro, orare, oravi, oratum|to ask; to pray|orator\nrapio, rapere, rapui, raptum|to snatch; to seize|rapture\nneglego, neglegere, neglexi, neglectum|to neglect; to disregard|neglect\nprosum, prodesse, profui|to be useful; to benefit|\nnoceo, nocere, nocui|to harm|noxious\nprohibeo, prohibere, prohibui, prohibitum|to keep off; to prevent|prohibit\nquidam, quaedam, quoddam|a certain; a (certain) person|\nparum|too little; not enough|\ndenique|finally|\ncirca|around|circa\nprae|in front of; before|\npro|in front of; for; on behalf of|\nabs|from; by|\n-ve|or|\nne|that not; so that not; lest|\nconiunctivus|subjunctive|\n# 28\nfretum, i n.|strait; sea|\nanimus, i m.|mind; courage; spirit|animosity\nturba, ae f.|crowd|turbulent\nfama, ae f.|reputation; rumour|fame\nlibellus, i m.|little book|\ndictum, i n.|saying|dictum\nprinceps, principis m.|leader; chief|prince, principal\ntibicen, tibicinis m.|flute player|\npotestas, potestatis f.|power|potent\nmundus, i m.|world; universe|mundane\nnavicula, ae f.|small boat|\nvigilia, ae f.|night watch|vigil\nphantasma, phantasmatis n.|ghost|phantom\ntranquillitas, tranquillitatis f.|calm; stillness|tranquillity\nvorago, voraginis f.|whirlpool; abyss|\npericulum, i n.|danger|peril\npraedo, praedonis m.|robber; pirate|predator\npeculium, i n.|savings|\ncaecus, a, um|blind|\nsurdus, a, um|deaf|\nmutus, a, um|mute; silent|mute\nclaudus, a, um|lame|\nuniversus, a, um|all; whole; entire|universe\nmortalis, e|mortal|mortal\nimmortalis, e|immortal|immortal\nconstans, constantis|steady; constant|constant\nsalvus, a, um|safe; saved|salvage\nattentus, a, um|attentive|attentive\ntutus, a, um|safe|\npericulosus, a, um|dangerous|perilous\nquadragesimus, a, um|fortieth|\ndisiungo, disiungere, disiunxi, disiunctum|to separate|disjointed\neicio, eicere, eieci, eiectum|to throw out|eject\ncesso, cessare, cessavi, cessatum|to stop; to cease|cease\noboedio, oboedire, oboedivi, oboeditum|to obey|obedient\nadoro, adorare, adoravi, adoratum|to worship; to adore|adore\nnascor, nasci, natus sum|to be born|native\nmorior, mori, mortuus sum|to die|mortal\nextendo, extendere, extendi, extentum|to stretch out|extend\napprehendo, apprehendere, apprehendi, apprehensum|to seize; to grasp|apprehend\nmemoro, memorare, memoravi, memoratum|to mention; to tell of|memorable\nrogo, rogare, rogavi, rogatum|to ask|interrogate\nevolvo, evolvere, evolvi, evolutum|to unroll; to open (a book)|evolve\nsuscito, suscitare, suscitavi, suscitatum|to wake up; to rouse|resuscitate\ntumultuor, tumultuari, tumultuatus sum|to make an uproar|\nhabeo, habere, habui, habitum|to consider; to regard (also: to have)|\nregno, regnare, regnavi, regnatum|to reign; to rule|reign\nversor, versari, versatus sum|to move about; to be (somewhere)|\npersuadeo, persuadere, persuasi, persuasum|to persuade|persuade\nsalvo, salvare, salvavi, salvatum|to save|salvation\npereo, perire, perii, peritum|to die; to perish|perish\nimpendeo, impendere|to hang over; to threaten|impending\npervenio, pervenire, perveni, perventum|to reach; to arrive|\nvito, vitare, vitavi, vitatum|to avoid|inevitable\nspero, sperare, speravi, speratum|to hope|despair\nservio, servire, servivi, servitum|to serve; to be a slave to|servant\nmalo, malle, malui|to prefer|\nadmiror, admirari, admiratus sum|to admire; to wonder at|admire\npotius|rather|\nutrum|whether|\nvelut|just as; like|\n# 29\nfundus, i m.|bottom|profound\nvita, ae f.|life|vital\nlucrum, i n.|profit; gain|lucrative\nspes, spei f.|hope|\ndivitiae, divitiarum f. pl.|riches; wealth|\niactura, ae f.|loss; sacrifice|\nlaetitia, ae f.|joy; happiness|\ntristitia, ae f.|sadness|\nnavigatio, navigationis f.|voyage; sailing|navigation\ndelphinus, i m.|dolphin|dolphin\nfides, fidei f.|faith; trust; loyalty|fidelity\nfidicen, fidicinis m.|lyre player|\ncantus, us m.|song; singing|chant\ncarmen, carminis n.|song; poem|\ndorsum, i n.|back|dorsal\nmaleficium, i n.|crime; wrongdoing|\nsalus, salutis f.|safety; health; greeting|salutary\nfur, furis m.|thief|furtive\nfurtum, i n.|theft|furtive\nbeneficium, i n.|kindness; favour|benefit\ntyrannus, i m.|tyrant|tyrant\nfelicitas, felicitatis f.|happiness; good fortune|felicity\ninvidia, ae f.|envy; jealousy|envy\npiscator, piscatoris m.|fisherman|\nfortuna, ae f.|fortune; luck|fortune\nremus, i m.|oar|\npretiosus, a, um|precious; valuable|precious\nmirus, a, um|amazing; strange|miracle\nmaestus, a, um|sad|\nfelix, felicis|happy; lucky|felicity\nnotus, a, um|known; well-known|notice\nignarus, a, um|unaware; ignorant|\nnobilis, e|famous; noble|noble\nignotus, a, um|unknown|\nrapidus, a, um|swift; rapid|rapid\ncelsus, a, um|tall; high|\nfallax, fallacis|deceitful|fallacy\nvelox, velocis|swift; fast|velocity\ndeterreo, deterrere, deterrui, deterritum|to frighten off; to deter|deter\nadicio, adicere, adieci, adiectum|to add|adjective\naestimo, aestimare, aestimavi, aestimatum|to value; to estimate|estimate, esteem\nremaneo, remanere, remansi|to stay behind; to remain|remain\nqueror, queri, questus sum|to complain|querulous\namitto, amittere, amisi, amissum|to lose|\neripio, eripere, eripui, ereptum|to snatch away; to rescue|\nafficio, afficere, affeci, affectum|to affect|affect\nprecor, precari, precatus sum|to pray|\nperturbo, perturbare, perturbavi, perturbatum|to throw into confusion; to disturb|perturb\nreduco, reducere, reduxi, reductum|to lead back; to bring back|reduce\ninvideo, invidere, invidi, invisum|to envy|envy\nparco, parcere, peperci|to spare|parsimony\npermitto, permittere, permisi, permissum|to allow; to permit|permission\npermoveo, permovere, permovi, permotum|to move deeply; to upset|\nabstineo, abstinere, abstinui, abstentum|to keep away (from)|abstain\ndesilio, desilire, desilui|to jump down|\ndespero, desperare, desperavi, desperatum|to despair|desperate\nallicio, allicere, allexi, allectum|to attract; to lure|\nsubeo, subire, subii, subitum|to go under; to undergo|\nexpono, exponere, exposui, expositum|to put out; to put ashore|expose\nappareo, apparere, apparui|to appear|appear\nstupeo, stupere, stupui|to be amazed; to be stunned|stupor\nconfiteor, confiteri, confessus sum|to confess|confess\nsurripio, surripere, surripui, surreptum|to steal|surreptitious\nabicio, abicere, abieci, abiectum|to throw away|abject\ndetraho, detrahere, detraxi, detractum|to pull off; to remove|detract\nsuadeo, suadere, suasi, suasum|to advise; to urge|persuade\ndono, donare, donavi, donatum|to give (as a gift)|donate\nseco, secare, secui, sectum|to cut|section\nrecognosco, recognoscere, recognovi, recognitum|to recognise|recognise\nfinio, finire, finivi, finitum|to end; to finish|finish\nappropinquo, appropinquare, appropinquavi, appropinquatum|to approach; to come near|\nnonnulli, ae, a|some; several|\nsese|himself; herself; themselves|\nfrustra|in vain|frustrate\ninde|from there; then|\nprotinus|immediately|\nrepente|suddenly|\nquasi|as if|quasi\nnonnumquam|sometimes|\n# 30\nbalneum, i n.|bath|\nhospes, hospitis m.|guest; host|hospitality\ncena, ae f.|dinner|\niter, itineris n.|journey|itinerary\nfames, famis f.|hunger|famine\nsitis, sitis f.|thirst|\nbonum, i n.|good thing|bonus\ntriclinium, i n.|dining room; dining couch|\nculina, ae f.|kitchen|culinary\ncoquus, i m.|cook|cook\nminister, ministri m.|servant; waiter|minister\nmedium, i n.|middle; centre|medium\nconvivium, i n.|dinner party; banquet|convivial\nconviva, ae m./f.|guest (at a dinner)|\ngenus, generis n.|kind; sort; family|genus, generic\nvas, vasis n.|vessel; dish|vase\nargentum, i n.|silver|Argentina\nholus, holeris n.|vegetables|\nnux, nucis f.|nut|\ncaro, carnis f.|meat; flesh|carnivore\nsal, salis m.|salt; wit|saline\ncalida, ae f.|hot water|\nmerum, i n.|undiluted wine|\nlibertinus, i m.|freedman|libertine\nmel, mellis n.|honey|mellifluous\ninexspectatus, a, um|unexpected|\ntardus, a, um|slow; late|tardy\ndiligens, diligentis|careful; diligent|diligent\niucundus, a, um|pleasant; delightful|jocund\nmolestus, a, um|annoying; troublesome|molest\nimus, a, um|lowest; bottom of|\nargenteus, a, um|made of silver|\ngloriosus, a, um|glorious; boastful|glorious\nacutus, a, um|sharp|acute\nmerus, a, um|pure; undiluted|mere\nacerbus, a, um|bitter; sour|acerbic\ndulcis, e|sweet|dulcet\nrecipio, recipere, recepi, receptum|to take back; to receive|receive\nsalvere iubere|to greet; to say hello|\nviso, visere, visi, visum|to go and see; to visit|visit\nrequiesco, requiescere, requievi, requietum|to rest|requiem\nfruor, frui, fructus sum|to enjoy (+ ablative)|fruition\nnuntio, nuntiare, nuntiavi, nuntiatum|to announce; to report|announce\ncontraho, contrahere, contraxi, contractum|to draw together; to contract|contract\npraesum, praeesse, praefui|to be in charge of (+ dative)|\nceno, cenare, cenavi, cenatum|to dine; to have dinner|\nperfero, perferre, pertuli, perlatum|to carry through; to endure|\neligo, eligere, elegi, electum|to choose; to pick out|elect\ncoquo, coquere, coxi, coctum|to cook|concoct\nexorno, exornare, exornavi, exornatum|to decorate; to adorn|\nparo, parare, paravi, paratum|to prepare|prepare\nsterno, sternere, stravi, stratum|to spread; to lay out|stratum\naccubo, accubare|to recline at table|\naccumbo, accumbere, accubui|to lie down at table|\nplaceo, placere, placui|to please (+ dative)|placate\ngusto, gustare, gustavi, gustatum|to taste|gustatory\naspergo, aspergere, aspersi, aspersum|to sprinkle|aspersion\nfundo, fundere, fudi, fusum|to pour|fusion\nmisceo, miscere, miscui, mixtum|to mix|mix\npoto, potare, potavi, potatum|to drink|potion\nlibero, liberare, liberavi, liberatum|to set free|liberate\napporto, apportare, apportavi, apportatum|to bring|\nprofero, proferre, protuli, prolatum|to bring out; to bring forward|proffer\nexhaurio, exhaurire, exhausi, exhaustum|to drain; to empty|exhaust\ncompleo, complere, complevi, completum|to fill; to complete|complete\nsinguli, ae, a|one each; one by one|single\nbini, ae, a|two each; two by two|binary\nterni, ae, a|three each|\ncirciter|about; approximately|\ndiu|for a long time|\npaulisper|for a little while|\ndemum|at last; finally|\npridem|long ago|\nequidem|for my part; indeed|\nsane|certainly; really|\n# 31\npotio, potionis f.|drink|potion\nrumor, rumoris m.|rumour; gossip|rumour\nmemoria, ae f.|memory|memorial\nmunus, muneris n.|gift; duty|remuneration\ncrux, crucis f.|cross|crucial\niuvenis, iuvenis m.|young man|juvenile\npraemium, i n.|reward; prize|premium\npoena, ae f.|punishment; penalty|penal\nius, iuris n.|right; law; justice|jury\nlex, legis f.|law|legislation\nparricida, ae m.|murderer of a parent|parricide\nscelus, sceleris n.|crime|\nsupplicium, i n.|punishment; execution|\nmos, moris m.|custom; habit|moral\niniuria, ae f.|injustice; wrong|injury\nsenex, senis m.|old man|senile, senate\nnugae, nugarum f. pl.|nonsense; trifles|\navarus, a, um|greedy|avarice\nimpatiens, impatientis|impatient|impatient\ninfelix, infelicis|unhappy; unlucky|\nasininus, a, um|of a donkey; stupid|asinine\nfidus, a, um|faithful; loyal|\ninfidus, a, um|unfaithful; disloyal|\nfugitivus, a, um|runaway|fugitive\nclemens, clementis|merciful; lenient|clemency\niustus, a, um|just; fair|justice\niniustus, a, um|unjust|injustice\nsapiens, sapientis|wise|homo sapiens\nscelestus, a, um|wicked|\ncrudelis, e|cruel|cruel\nvetus, veteris|old|veteran\ninvalidus, a, um|weak|invalid\ndebilis, e|weak; feeble|debilitate\nebrius, a, um|drunk|inebriated\nnonagesimus, a, um|ninetieth|\nopto, optare, optavi, optatum|to wish; to choose|opt, option\naufugio, aufugere, aufugi|to run away; to escape|\naufero, auferre, abstuli, ablatum|to take away; to carry off|ablative\nfido, fidere, fisus sum|to trust (+ dative)|confidence\nconfido, confidere, confisus sum|to trust; to rely on|confide\ncrucio, cruciare, cruciavi, cruciatum|to torture; to torment|excruciating\nlateo, latere, latui|to lie hidden|latent\nretraho, retrahere, retraxi, retractum|to drag back|retract\nstatuo, statuere, statui, statutum|to decide; to set up|statute\nignosco, ignoscere, ignovi, ignotum|to forgive (+ dative)|\nodi, odisse|to hate|odious\nveto, vetare, vetui, vetitum|to forbid|veto\neduco, educare, educavi, educatum|to bring up; to educate|educate\nabduco, abducere, abduxi, abductum|to lead away|abduct\nfabulor, fabulari, fabulatus sum|to talk; to chat|fable\nquidquid|whatever|\nquisquis|whoever|\nquantum|as much as; how much|quantum\naliquantum|a good deal|\nnimium|too much|\nquamobrem|why; for what reason|\nideo|for that reason; therefore|\nfunditus|completely; from the bottom|\npriusquam|before|\nnamque|for; because|\ncoram|in the presence of|\n# 32\nlegio, legionis f.|legion|legion\ncohors, cohortis f.|cohort|cohort\nagmen, agminis n.|army on the march; column|\nordo, ordinis m.|row; rank; order|order\nacies, aciei f.|battle line; sharp edge|\nproelium, i n.|battle|\nimperator, imperatoris m.|general; commander|emperor\naetas, aetatis f.|age; lifetime|\nstudium, i n.|eagerness; study|study\nstipendium, i n.|pay; military service|stipend\nvirtus, virtutis f.|courage; virtue|virtue\ngaudium, i n.|joy|\nvaletudo, valetudinis f.|health|valetudinarian\namnis, amnis m.|river|\nratis, ratis f.|raft|\nripa, ae f.|bank (of a river)|riparian\ncaedes, caedis f.|slaughter; killing|\nvulnus, vulneris n.|wound|vulnerable\npax, pacis f.|peace|pacify\nlegatus, i m.|envoy; ambassador|legate\nensis, ensis m.|sword|\nlegionarius, a, um|legionary|\nidoneus, a, um|suitable|\nmilitaris, e|military|military\npublicus, a, um|public|public\nprivatus, a, um|private|private\nposterus, a, um|next; following|posterity\narduus, a, um|steep; difficult|arduous\nridiculus, a, um|funny; ridiculous|ridiculous\nulterior|further; farther|ulterior\nciterior|nearer|\nincolumis, e|unharmed; safe|\notiosus, a, um|idle; at leisure|otiose\ndirus, a, um|dreadful; awful|dire\nhorrendus, a, um|horrible; dreadful|horrendous\ndeni, ae, a|ten each|denarius\nseni, ae, a|six each|\nquini, ae, a|five each|\nquaterni, ae, a|four each|\ncommemoro, commemorare, commemoravi, commemoratum|to mention; to recall|commemorate\nstudeo, studere, studui|to be keen on; to study (+ dative)|study\ncogo, cogere, coegi, coactum|to force; to compel; to gather|cogent\nfatigo, fatigare, fatigavi, fatigatum|to tire out|fatigue\npropero, properare, properavi, properatum|to hurry|\ndesidero, desiderare, desideravi, desideratum|to long for; to miss|desire\ntransfero, transferre, transtuli, translatum|to carry across; to transfer|transfer, translate\neffundo, effundere, effudi, effusum|to pour out|effusive\npraesto, praestare, praestiti|to show; to provide; to be better than|\ntranseo, transire, transii, transitum|to cross; to go over|transit\ncopulo, copulare, copulavi, copulatum|to join; to connect|couple\nconvoco, convocare, convocavi, convocatum|to call together|convocation\nexcurro, excurrere, excurri, excursum|to run out|excursion\nprocurro, procurrere, procurri, procursum|to run forward; to charge|\nerumpo, erumpere, erupi, eruptum|to break out; to burst out|erupt\nvulnero, vulnerare, vulneravi, vulneratum|to wound|vulnerable\nfore|to be about to be (future infinitive of esse)|\nplerique, pleraeque, pleraque|most; the majority|\npridie|the day before|\npraecipue|especially|\ntamdiu|so long|\nquamdiu|as long as; how long|\ndiutius|longer; for a longer time|\nfere|almost; about|\netenim|for; and indeed|\ncitra|on this side of|\nultra|beyond; on the far side of|ultraviolet\nsecundum|along; according to|\n# 34\nscalpellum, i n.|scalpel|scalpel\nopera, ae f.|effort; work|operation\nludi, ludorum m. pl.|games; public shows|ludicrous\ncertamen, certaminis n.|contest; fight|\ngladiator, gladiatoris m.|gladiator|gladiator\nrete, retis n.|net|reticulate\nspectator, spectatoris m.|spectator|spectator\npalma, ae f.|palm (of the hand); palm branch; victory|palm\ncircus, i m.|circus; racecourse|circus\nauriga, ae m.|charioteer|\ntheatrum, i n.|theatre|theatre\ncomoedia, ae f.|comedy|comedy\ningenium, i n.|talent; nature; character|ingenious\nratio, rationis f.|reason; method; account|rational\nprincipium, i n.|beginning|principle\nfatum, i n.|fate; destiny|fatal\ngremium, i n.|lap|\ntenebrae, tenebrarum f. pl.|darkness|\nlucerna, ae f.|lamp|\npasser, passeris m.|sparrow|passerine\ndeliciae, deliciarum f. pl.|delight; darling|delicious\nocellus, i m.|little eye; darling|\nmens, mentis f.|mind|mental\nbasium, i n.|kiss|\nodium, i n.|hatred|odious\nrisus, us m.|laughter|risible\ncachinnus, i m.|loud laugh|\naranea, ae f.|spider's web; spider|arachnid\nepigramma, epigrammatis n.|short poem; epigram|epigram\nsinus, us m.|fold; bosom; bay|sinus\nversiculus, i m.|short line of verse|\nanus, us f.|old woman|\ntestis, testis m.|witness|testify\nopes, opum f. pl.|resources; wealth|opulent\ndiphthongus, i f.|diphthong|diphthong\nnota, ae f.|mark; sign|note\nturgidus, a, um|swollen|turgid\nmisellus, a, um|poor little; wretched|\ngladiatorius, a, um|of gladiators|\ncircensis, e|of the circus|\nscaenicus, a, um|of the stage; theatrical|scenic\nacer, acris, acre|sharp; keen; fierce|acrid\ngeminus, a, um|twin|Gemini\nbellus, a, um|pretty; lovely|belle, embellish\npoeticus, a, um|poetic|poetic\nvenustus, a, um|charming; attractive|\nmellitus, a, um|sweet as honey|\ntenebricosus, a, um|dark; gloomy|\nultimus, a, um|last; farthest|ultimate\nperpetuus, a, um|continuous; everlasting|perpetual\ndubius, a, um|doubtful|dubious\niocosus, a, um|funny; joking|jocular\nserius, a, um|serious|serious\nniveus, a, um|snow-white|\ncerto, certare, certavi, certatum|to compete; to contend|\nlaedo, laedere, laesi, laesum|to hurt; to injure|lesion\nimplico, implicare, implicavi, implicatum|to entangle; to involve|implicate\nplaudo, plaudere, plausi, plausum|to clap; to applaud|applaud\nlibere|freely|liberally\nfaveo, favere, favi, fautum|to favour; to support (+ dative)|favour\nlugeo, lugere, luxi, luctum|to mourn|lugubrious\naccendo, accendere, accendi, accensum|to light; to set on fire|\ncircumsilio, circumsilire|to jump around|\npipio, pipiare|to chirp|\ndevoro, devorare, devoravi, devoratum|to swallow up; to devour|devour\nconturbo, conturbare, conturbavi, conturbatum|to confuse; to throw into disorder|\nnubo, nubere, nupsi, nuptum|to marry (a man) (+ dative)|nuptial\naffirmo, affirmare, affirmavi, affirmatum|to assert; to affirm|affirm\nrequiro, requirere, requisivi, requisitum|to ask for; to look for|require\nexcrucio, excruciare, excruciavi, excruciatum|to torture; to torment|excruciating\noscito, oscitare|to yawn|\nsapio, sapere, sapivi|to be wise; to have sense|sapient\nerubesco, erubescere, erubui|to blush|\nprosilio, prosilire, prosilui|to jump forward; to leap out|\nelido, elidere, elisi, elisum|to strike out; to drop (a vowel)|elision\nlibenter|gladly; willingly|\nplerumque|usually; mostly|\ninterdum|sometimes|\ndummodo|provided that|\ndein|then; next|\nnil|nothing|nil\ntrochaeus, i m.|trochee|trochee\niambus, i m.|iamb|iambic\ndactylus, i m.|dactyl|dactyl\nspondeus, i m.|spondee|spondee\nhexameter, hexametri m.|hexameter|hexameter\npentameter, pentametri m.|pentameter|pentameter\nhendecasyllabus, i m.|hendecasyllable (11-syllable line)|\n# 35\noratio, orationis f.|speech; language|oration\nconiunctio, coniunctionis f.|conjunction|conjunction\ninteriectio, interiectionis f.|interjection|interjection\nMusa, ae f.|Muse|muse\nscamnum, i n.|stool; bench|\nsacerdos, sacerdotis m./f.|priest; priestess|sacerdotal\ncasus, us m.|case (grammar)|case\ncomparatio, comparationis f.|comparison|comparison\nqualitas, qualitatis f.|quality|quality\nquantitas, quantitatis f.|quantity|quantity\nsignificatio, significationis f.|meaning|signification\nspecies, speciei f.|appearance; kind|species\nira, ae f.|anger|irate\naffectus, us m.|feeling; emotion|affection\nadmiratio, admirationis f.|wonder; admiration|admiration\nconiugatio, coniugationis f.|conjugation|conjugation\nproprius, a, um|one's own; proper|property\nappellativus, a, um|common (of a noun)|\npositivus, a, um|positive|positive\noptativus, a, um|expressing a wish|optative\ncopulativus, a, um|joining; connective|\ndisiunctivus, a, um|separating; disjunctive|disjunctive\nexpletivus, a, um|filling out; expletive|expletive\ncausalis, e|causal|causal\nrationalis, e|rational|rational\ninconditus, a, um|rough; disorderly|\nsimilis, e|like; similar|similar\ninflecto, inflectere, inflexi, inflexum|to bend; to inflect|inflection\ndemo, demere, dempsi, demptum|to take away; to remove|\nluctor, luctari, luctatus sum|to wrestle; to struggle|reluctant\nexplano, explanare, explanavi, explanatum|to explain|explanation\nadnecto, adnectere, adnexui, adnexum|to attach; to connect|annex\nordino, ordinare, ordinavi, ordinatum|to arrange; to put in order|ordinate\nmentionem facere|to mention|\ndumtaxat|only; at least|\ntantundem|just as much|\nquidni?|why not?|\nforsitan|perhaps|\nsiquidem|if indeed; since|\nquapropter|therefore; wherefore|\npropterea|for that reason|\nadversum|against; towards|\ncis|on this side of|cisalpine\nen|look!; behold!|\neia|come on!|\neuax|hurray!|\npapae|wow!; oh my!|\nattat|oh!; aha!|\nsynonymum, i n.|synonym|synonym\n";
+const STORE_KEY = 'lingua-latina-amina-v1';
+
+/* ---------- data ---------- */
+const WORDS = [];
+const CHAPTERS = [];
+(function parse() {
+  let ch = 0;
+  RAW.split('\n').forEach(line => {
+    line = line.trim();
+    if (!line) return;
+    if (line.startsWith('#')) { ch = parseInt(line.slice(1), 10); CHAPTERS.push(ch); return; }
+    const [la, en, de] = line.split('|');
+    const n = WORDS.filter(w => w.ch === ch).length;
+    WORDS.push({ id: ch + ':' + n, ch, la, en, de: (de || '').trim() });
+  });
+})();
+
+const ROMAN = n => {
+  const m = [[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']];
+  let s = ''; for (const [v, r] of m) while (n >= v) { s += r; n -= v; } return s;
+};
+
+/* ---------- storage ---------- */
+function load(key, fallback) {
+  try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; } catch (e) { return fallback; }
+}
+function save(key, val) { try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) {} }
+
+let stats = load(STORE_KEY, {});            // id -> [right, wrong, last]
+let prefs = load(STORE_KEY + '-prefs', { chapters: [1], dir: 'la', mode: 'flash', len: 20 });
+
+function record(w, ok) {
+  const s = stats[w.id] || [0, 0, 0];
+  if (ok) s[0]++; else s[1]++;
+  s[2] = ok ? 1 : 0;
+  stats[w.id] = s; save(STORE_KEY, stats);
+}
+const isKnown = w => stats[w.id] && stats[w.id][2] === 1;
+const isTricky = w => stats[w.id] && stats[w.id][2] === 0;
+
+/* ---------- answer checking ---------- */
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+function normEn(s) {
+  return s.toLowerCase()
+    .replace(/\(.*?\)/g, ' ')
+    .replace(/[!?.'"]/g, '')
+    .replace(/^(he|she|it|they)\s+/, '')
+    .replace(/^(to|a|an|the)\s+/, '')
+    .replace(/our\b/g, 'or').replace(/is(e|ed|es|ing)\b/g, 'iz$1')
+    .replace(/\s+/g, ' ').trim();
+}
+function enAlts(en) {
+  const s = en.toLowerCase().replace(/\(.*?\)/g, ' ').replace(/he, she, (or )?it /g, '');
+  return s.split(/[;,/]/).map(normEn).filter(Boolean);
+}
+function normLa(s) {
+  return s.toLowerCase().replace(/j/g, 'i').replace(/[^a-z\s-]/g, ' ').replace(/\s+/g, ' ').trim();
+}
+function laAlts(la) {
+  const out = new Set();
+  la.split('/').forEach(part => {
+    part.split(',').forEach((bit, k) => {
+      const b = normLa(bit);
+      // headword always; other principal parts / forms if they look like real words
+      if (k === 0 ? b : (b.length >= 4 && !/\./.test(bit) && !/^-/.test(bit.trim()))) out.add(b);
+    });
+  });
+  out.add(normLa(la));
+  return [...out];
+}
+function lev(a, b) {
+  if (a === b) return 0;
+  const d = Array.from({ length: a.length + 1 }, (_, i) => [i]);
+  for (let j = 1; j <= b.length; j++) d[0][j] = j;
+  for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++)
+    d[i][j] = Math.min(d[i-1][j] + 1, d[i][j-1] + 1, d[i-1][j-1] + (a[i-1] === b[j-1] ? 0 : 1));
+  return d[a.length][b.length];
+}
+// returns 'exact' | 'close' | false
+function matchAny(input, alts, closeLen) {
+  if (!input) return false;
+  if (alts.includes(input)) return 'exact';
+  for (const a of alts) {
+    const tol = a.length >= 9 ? 2 : a.length >= closeLen ? 1 : 0;
+    if (tol && lev(input, a) <= tol) return 'close';
+  }
+  return false;
+}
+function sharesMeaning(a, b) {
+  const x = enAlts(a.en), y = enAlts(b.en);
+  return x.some(v => y.includes(v));
+}
+function checkTyped(card, raw) {
+  const w = card.w;
+  if (card.dir === 'la') {
+    return matchAny(normEn(raw), enAlts(w.en), 5);
+  }
+  // English -> Latin: accept any Latin word that shares a meaning (synonyms)
+  const input = normLa(raw);
+  let best = matchAny(input, laAlts(w.la), 6);
+  if (best === 'exact') return best;
+  for (const o of WORDS) {
+    if (o !== w && sharesMeaning(o, w)) {
+      const m = matchAny(input, laAlts(o.la), 6);
+      if (m === 'exact') return 'exact';
+      if (m && !best) best = m;
+    }
+  }
+  return best;
+}
+
+/* ---------- helpers ---------- */
+const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const isVerbish = w => /^to /.test(w.en) || /, -?[a-z]*(are|ere|ire)\b/.test(w.la)
+  || (/^[a-z]+(at|et|it|unt|ant|ent)$/.test(w.la) && /s$/.test(w.en.split(';')[0].trim()));
+function latinHTML(la) {
+  const i = la.indexOf(',');
+  if (i < 0) return esc(la);
+  return esc(la.slice(0, i)) + '<span class="rest">' + esc(la.slice(i + 1).trim()) + '</span>';
+}
+function derivHTML(w) {
+  return w.de ? `<div class="deriv">English words from it: <em>${esc(w.de)}</em></div>` : '';
+}
+
+/* ---------- state ---------- */
+const app = document.getElementById('app');
+let S = null; // session
+
+function pool() { return WORDS.filter(w => prefs.chapters.includes(w.ch)); }
+
+function buildDeck(words, len) {
+  const tricky = shuffle(words.filter(isTricky));
+  const fresh = shuffle(words.filter(w => !stats[w.id]));
+  const known = shuffle(words.filter(isKnown));
+  const ordered = [...tricky, ...fresh, ...known];
+  return shuffle(len === 'all' ? ordered : ordered.slice(0, len));
+}
+
+function startSession(words) {
+  if (!words.length) return;
+  const deck = words.map(w => ({ w, dir: prefs.dir === 'mix' ? (Math.random() < 0.5 ? 'la' : 'en') : prefs.dir }));
+  S = { deck, i: 0, right: 0, missed: [], phase: 'ask', result: null, typed: '', options: null, picked: null, pool: pool() };
+  renderCard();
+}
+
+/* ---------- home ---------- */
+function renderHome() {
+  S = null;
+  const total = WORDS.length;
+  const known = WORDS.filter(isKnown).length;
+  const tricky = WORDS.filter(isTricky);
+  const selected = pool();
+  const lenLabel = prefs.len === 'all' ? selected.length : Math.min(prefs.len, selected.length);
+
+  app.innerHTML = `
+    <header class="masthead">
+      <h1>Lingua Latina</h1>
+      <p>Amina's vocabulary practice, chapters I to XXXV</p>
+      <div class="overall"><strong>${known}</strong> of ${total} words known</div>
+    </header>
+
+    <div class="row"><h2>Chapters</h2>
+      <span><button class="linkish" data-act="all">All</button> &nbsp; <button class="linkish" data-act="none">Clear</button></span>
+    </div>
+    <div class="chapters">
+      ${CHAPTERS.map(c => {
+        const ws = WORDS.filter(w => w.ch === c);
+        const k = ws.filter(isKnown).length;
+        const on = prefs.chapters.includes(c);
+        return `<button class="ch" data-ch="${c}" aria-pressed="${on}" aria-label="Chapter ${c}, ${k} of ${ws.length} known">
+          <span class="num">${ROMAN(c)}</span><span class="cnt">${k}/${ws.length}</span>
+          <span class="bar" style="width:${ws.length ? (k / ws.length * 100) : 0}%"></span></button>`;
+      }).join('')}
+    </div>
+
+    <h2>Direction</h2>
+    <div class="seg" data-pref="dir">
+      ${[['la','Latin to English'],['en','English to Latin'],['mix','Mixed']].map(([v,l]) =>
+        `<button data-v="${v}" aria-pressed="${prefs.dir === v}">${l}</button>`).join('')}
+    </div>
+
+    <h2>How to practise</h2>
+    <div class="seg" data-pref="mode">
+      ${[['flash','Flashcards'],['choose','Multiple choice'],['type','Type the answer']].map(([v,l]) =>
+        `<button data-v="${v}" aria-pressed="${prefs.mode === v}">${l}</button>`).join('')}
+    </div>
+    <p class="hint">${{
+      flash: 'See the word, say the answer in your head, then check.',
+      choose: 'Pick the right meaning from four.',
+      type: 'Type it out. For Latin, the first word of the dictionary entry is enough.'
+    }[prefs.mode]}</p>
+
+    <h2>How many words</h2>
+    <div class="seg" data-pref="len">
+      ${[[10,'10'],[20,'20'],[40,'40'],['all','All']].map(([v,l]) =>
+        `<button data-v="${v}" aria-pressed="${prefs.len === v}">${l}</button>`).join('')}
+    </div>
+    <p class="hint">Words you got wrong last time come up first, then new ones.</p>
+
+    <button class="primary" data-act="start" ${selected.length ? '' : 'disabled'}>
+      ${selected.length ? `Start with ${lenLabel} words` : 'Pick at least one chapter'}
+    </button>
+    ${tricky.length ? `<button class="secondary" data-act="tricky">Practise my ${tricky.length} tricky word${tricky.length > 1 ? 's' : ''}</button>` : ''}
+
+    <p class="foot">Progress is saved on this device. <button class="linkish" data-act="reset">Reset progress</button></p>
+  `;
+
+  app.querySelectorAll('.ch').forEach(b => b.onclick = () => {
+    const c = +b.dataset.ch;
+    prefs.chapters = prefs.chapters.includes(c) ? prefs.chapters.filter(x => x !== c) : [...prefs.chapters, c];
+    save(STORE_KEY + '-prefs', prefs); renderHome();
+  });
+  app.querySelectorAll('.seg').forEach(seg => seg.querySelectorAll('button').forEach(b => b.onclick = () => {
+    const k = seg.dataset.pref; let v = b.dataset.v;
+    if (k === 'len' && v !== 'all') v = +v;
+    prefs[k] = v; save(STORE_KEY + '-prefs', prefs); renderHome();
+  }));
+  app.querySelector('[data-act="all"]').onclick = () => { prefs.chapters = [...CHAPTERS]; save(STORE_KEY + '-prefs', prefs); renderHome(); };
+  app.querySelector('[data-act="none"]').onclick = () => { prefs.chapters = []; save(STORE_KEY + '-prefs', prefs); renderHome(); };
+  app.querySelector('[data-act="start"]').onclick = () => startSession(buildDeck(pool(), prefs.len));
+  const t = app.querySelector('[data-act="tricky"]');
+  if (t) t.onclick = () => startSession(shuffle(WORDS.filter(isTricky)));
+  app.querySelector('[data-act="reset"]').onclick = () => {
+    if (confirm('Clear all saved progress? This cannot be undone.')) { stats = {}; save(STORE_KEY, stats); renderHome(); }
+  };
+}
+
+/* ---------- card ---------- */
+function makeOptions(card) {
+  const w = card.w;
+  const base = S.pool.length >= 8 ? S.pool : WORDS;
+  const valid = x => x !== w && !sharesMeaning(x, w) && x.la !== w.la;
+  let cands = shuffle(base.filter(x => valid(x) && isVerbish(x) === isVerbish(w)));
+  if (cands.length < 3) cands = shuffle(WORDS.filter(valid));
+  const picked = [];
+  for (const c of cands) {
+    if (picked.length === 3) break;
+    const label = card.dir === 'la' ? c.en : c.la;
+    if (!picked.some(p => (card.dir === 'la' ? p.en : p.la) === label)) picked.push(c);
+  }
+  return shuffle([w, ...picked]);
+}
+
+function renderCard() {
+  const card = S.deck[S.i];
+  const w = card.w;
+  const n = S.deck.length;
+  const mode = prefs.mode;
+  if (mode === 'choose' && !S.options) S.options = makeOptions(card);
+
+  const prompt = card.dir === 'la'
+    ? `<div class="latin">${latinHTML(w.la)}</div>`
+    : `<div class="english">${esc(w.en)}</div>`;
+  const askLine = {
+    flash: card.dir === 'la' ? 'What does it mean?' : 'What is the Latin?',
+    choose: card.dir === 'la' ? 'Choose the meaning' : 'Choose the Latin',
+    type: card.dir === 'la' ? 'Type the meaning' : 'Type the Latin'
+  }[mode];
+
+  const answered = S.phase === 'done';
+  const revealBlock = `
+    <div class="reveal">
+      ${S.result ? `<div class="verdict ${S.result}">${
+        S.result === 'good' ? 'Correct' : S.result === 'close' ? 'Nearly: check the spelling' : 'Not quite'}</div>` : ''}
+      ${card.dir === 'la'
+        ? `<div class="english">${esc(w.en)}</div>`
+        : `<div class="latin">${latinHTML(w.la)}</div>`}
+      ${derivHTML(w)}
+    </div>`;
+
+  let body = '';
+  if (mode === 'flash') {
+    body = `
+      <div class="tablet ${S.phase === 'ask' ? 'clickable' : ''}" data-act="flip">
+        <div class="cap">Capitulum ${ROMAN(w.ch)}</div>
+        ${prompt}
+        ${S.phase === 'ask' ? `<div class="ask">${askLine}</div>` : revealBlock}
+      </div>
+      ${S.phase === 'ask'
+        ? `<div class="next"><button class="primary" data-act="show">Show answer</button></div>`
+        : S.phase === 'judge'
+          ? `<div class="pair"><button class="yes" data-act="knew">I knew it</button><button class="no" data-act="didnt">Not yet</button></div>`
+          : ''}`;
+  } else if (mode === 'choose') {
+    body = `
+      <div class="tablet">
+        <div class="cap">Capitulum ${ROMAN(w.ch)}</div>
+        ${prompt}
+        <div class="ask">${askLine}</div>
+        ${answered ? revealBlock : ''}
+      </div>
+      <div class="options">
+        ${S.options.map((o, idx) => {
+          let cls = 'opt' + (card.dir === 'en' ? ' lat' : '');
+          if (answered && o === w) cls += ' correct';
+          if (answered && S.picked === o && o !== w) cls += ' wrong';
+          const label = card.dir === 'la' ? o.en : o.la.split(',')[0];
+          return `<button class="${cls}" data-opt="${idx}" ${answered ? 'disabled' : ''}><span class="k">${idx + 1}</span><span>${esc(label)}</span></button>`;
+        }).join('')}
+      </div>
+      ${answered ? `<div class="next"><button class="primary" data-act="next">${S.i + 1 < n ? 'Next word' : 'See results'}</button></div>` : ''}`;
+  } else {
+    body = `
+      <div class="tablet">
+        <div class="cap">Capitulum ${ROMAN(w.ch)}</div>
+        ${prompt}
+        ${answered ? revealBlock : `<div class="ask">${askLine}</div>`}
+      </div>
+      ${answered
+        ? `${S.result === 'bad' ? `<p class="hint">You wrote: <strong>${esc(S.typed || '(nothing)')}</strong>. <button class="linkish" data-act="override">I was right, count it</button></p>` : ''}
+           <div class="next"><button class="primary" data-act="next">${S.i + 1 < n ? 'Next word' : 'See results'}</button></div>`
+        : `<form class="answer-row" data-act="check" autocomplete="off">
+             <label class="sr" for="ans">Your answer</label>
+             <input id="ans" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" placeholder="${card.dir === 'la' ? 'meaning' : 'Latin word'}">
+             <button type="submit">Check</button>
+           </form>
+           <p class="hint"><button class="linkish" data-act="giveup">Show me the answer</button></p>`}`;
+  }
+
+  app.innerHTML = `
+    <div class="topbar">
+      <button class="linkish" data-act="stop">Stop</button>
+      <div class="progress" aria-hidden="true"><i style="width:${(S.i / n) * 100}%"></i></div>
+      <span class="count">${S.i + 1} / ${n}</span>
+    </div>
+    ${body}`;
+
+  // wiring
+  const on = (sel, fn) => { const el = app.querySelector(sel); if (el) el.onclick = fn; };
+  on('[data-act="stop"]', () => { if (S.i === 0 && S.phase === 'ask' || confirm('Stop this round? Answers so far are saved.')) renderResults(); });
+  const reveal = () => { if (S.phase === 'ask') { S.phase = 'judge'; renderCard(); } };
+  on('[data-act="show"]', reveal);
+  on('[data-act="flip"]', reveal);
+  on('[data-act="knew"]', () => answer(true));
+  on('[data-act="didnt"]', () => answer(false));
+  on('[data-act="next"]', advance);
+  on('[data-act="giveup"]', () => { S.typed = ''; answer(false); });
+  on('[data-act="override"]', () => {
+    // undo the wrong mark and count it right
+    const s = stats[w.id]; if (s && s[1] > 0) s[1]--;
+    record(w, true);
+    S.missed = S.missed.filter(x => x !== w); S.right++; S.result = 'good'; renderCard();
+  });
+  app.querySelectorAll('[data-opt]').forEach(b => b.onclick = () => {
+    if (S.phase === 'done') return;
+    S.picked = S.options[+b.dataset.opt];
+    answer(S.picked === w);
+  });
+  const form = app.querySelector('form[data-act="check"]');
+  if (form) {
+    const input = form.querySelector('input');
+    setTimeout(() => input.focus(), 30);
+    form.onsubmit = e => {
+      e.preventDefault();
+      const val = input.value.trim();
+      if (!val) { input.focus(); return; }
+      S.typed = val;
+      const m = checkTyped(card, val);
+      answer(!!m, m === 'close' ? 'close' : null);
+    };
+  }
+  if (answered && mode !== 'flash') { const nb = app.querySelector('[data-act="next"]'); if (nb) nb.focus(); }
+}
+
+function answer(ok, flavour) {
+  const w = S.deck[S.i].w;
+  record(w, ok);
+  if (ok) S.right++; else S.missed.push(w);
+  S.result = ok ? (flavour || 'good') : 'bad';
+  if (prefs.mode === 'flash') { advance(); return; }
+  S.phase = 'done';
+  renderCard();
+}
+
+function advance() {
+  S.i++;
+  S.phase = 'ask'; S.result = null; S.options = null; S.picked = null; S.typed = '';
+  if (S.i >= S.deck.length) renderResults(); else renderCard();
+}
+
+/* ---------- results ---------- */
+function renderResults() {
+  const done = Math.min(S.i, S.deck.length);
+  const missed = [...new Set(S.missed)];
+  app.innerHTML = `
+    <header class="masthead">
+      <h1>Finis</h1>
+      <div class="score">${S.right} / ${done}</div>
+      <p>${done === 0 ? 'No words answered this round.'
+        : S.right === done ? 'Every one right. Optime!'
+        : S.right / done >= 0.8 ? 'Bene! Nearly all of them.'
+        : 'Keep going: the missed words will come up first next time.'}</p>
+    </header>
+    ${missed.length ? `
+      <h2>Words to look at again</h2>
+      <ul class="missed">${missed.map(w => `<li><span class="l">${esc(w.la.split(',')[0])}</span><span class="e">${esc(w.en)}</span></li>`).join('')}</ul>
+      <button class="primary" data-act="again">Practise these ${missed.length} again</button>` : ''}
+    <button class="${missed.length ? 'secondary' : 'primary'}" data-act="home">Back to chapters</button>`;
+  const again = app.querySelector('[data-act="again"]');
+  if (again) again.onclick = () => startSession(shuffle(missed));
+  app.querySelector('[data-act="home"]').onclick = renderHome;
+  window.scrollTo(0, 0);
+}
+
+/* ---------- keyboard ---------- */
+document.addEventListener('keydown', e => {
+  if (!S || S.i >= S.deck.length) return;
+  if (e.target.tagName === 'INPUT') return;
+  const mode = prefs.mode;
+  if (mode === 'flash') {
+    if (S.phase === 'ask' && (e.key === ' ' || e.key === 'Enter')) { e.preventDefault(); S.phase = 'judge'; renderCard(); }
+    else if (S.phase === 'judge' && e.key === '1') answer(true);
+    else if (S.phase === 'judge' && e.key === '2') answer(false);
+  } else if (mode === 'choose' && S.phase !== 'done' && /^[1-4]$/.test(e.key)) {
+    const o = S.options[+e.key - 1]; if (o) { S.picked = o; answer(o === S.deck[S.i].w); }
+  }
+});
+
+renderHome();
+</script>
+</body>
+</html>
